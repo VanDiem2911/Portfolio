@@ -93,3 +93,18 @@
   border-color: rgba(59, 130, 246, 0.25);
   box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.05);
 }
+
+/* Wiggle ringing animation keyframes */
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0); }
+  15% { transform: rotate(-12deg); }
+  30% { transform: rotate(14deg); }
+  45% { transform: rotate(-10deg); }
+  60% { transform: rotate(10deg); }
+  75% { transform: rotate(-4deg); }
+  90% { transform: rotate(4deg); }
+}
+
+.animate-wiggle {
+  animation: wiggle 1.2s ease-in-out infinite;
+}

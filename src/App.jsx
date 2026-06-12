@@ -9,6 +9,7 @@ import Blog from './components/Blog';
 import Resume from './components/Resume';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import FloatingContact from './components/FloatingContact';
 import { portfolioData } from './data/portfolioData';
 
 export default function App() {
@@ -118,6 +119,7 @@ export default function App() {
         <Contact language={language} />
       </main>
       <Footer language={language} />
+      <FloatingContact language={language} />
     </>
   );
 }
