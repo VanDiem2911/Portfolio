@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Calendar, Play, ArrowRight } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
 
@@ -7,14 +7,18 @@ export default function Blog({ language }) {
   const [activeTab, setActiveTab] = useState('news');
 
   return (
-    <section id="blog" className="py-20 lg:py-28 bg-stone-100/40 dark:bg-stone-900/20">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="blog" className="py-20 lg:py-28 bg-white dark:bg-[#0b0f19] relative overflow-hidden">
+      {/* Background gradients */}
+      <div className="absolute top-1/4 left-0 w-80 h-80 bg-[#0df58b]/5 rounded-full filter blur-[100px] pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        
         {/* Header */}
         <div className="text-center mb-16 reveal">
-          <span className="block font-title text-brandGreen-600 dark:text-brandGreen-600 text-xs font-bold uppercase tracking-widest mb-2">
+          <span className="block font-title text-brandGreen-700 dark:text-[#0df58b] text-xs font-bold uppercase tracking-[0.25em] mb-3">
             {data.subtitle}
           </span>
-          <h2 className="inline-block text-3xl md:text-4xl font-title font-bold text-stone-900 dark:text-stone-50 relative pb-4 after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-16 after:h-1 after:bg-brandBlue-600 dark:after:bg-brandBlue-500 after:rounded">
+          <h2 className="text-3xl md:text-5xl font-title font-bold text-stone-950 dark:text-stone-50">
             {data.title}
           </h2>
         </div>
@@ -24,8 +28,8 @@ export default function Blog({ language }) {
           <button 
             className={`px-5 py-2.5 rounded-full border text-xs font-bold font-title transition-all duration-300 ${
               activeTab === 'news' 
-                ? 'bg-brandBlue-600 dark:bg-brandBlue-500 text-white border-brandBlue-600' 
-                : 'bg-brandBeige-50 dark:bg-stone-900/40 border-stone-200 dark:border-stone-800 text-stone-500 dark:text-stone-400 hover:bg-brandBlue-50 dark:hover:bg-brandBlue-900/20 hover:text-brandBlue-600 dark:hover:text-brandBlue-400'
+                ? 'bg-brandGreen-600 dark:bg-[#0df58b] text-white dark:text-stone-950 border-brandGreen-600 dark:border-[#0df58b] shadow-[0_0_15px_rgba(13,245,139,0.2)]' 
+                : 'bg-stone-50 dark:bg-[#111827]/40 border-stone-200 dark:border-stone-800 text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-900/60 hover:text-stone-900 dark:hover:text-white hover:border-brandGreen-600/20 dark:hover:border-[#0df58b]/20'
             }`}
             onClick={() => setActiveTab('news')}
           >
@@ -34,8 +38,8 @@ export default function Blog({ language }) {
           <button 
             className={`px-5 py-2.5 rounded-full border text-xs font-bold font-title transition-all duration-300 ${
               activeTab === 'guide' 
-                ? 'bg-brandBlue-600 dark:bg-brandBlue-500 text-white border-brandBlue-600' 
-                : 'bg-brandBeige-50 dark:bg-stone-900/40 border-stone-200 dark:border-stone-800 text-stone-500 dark:text-stone-400 hover:bg-brandBlue-50 dark:hover:bg-brandBlue-900/20 hover:text-brandBlue-600 dark:hover:text-brandBlue-400'
+                ? 'bg-brandGreen-600 dark:bg-[#0df58b] text-white dark:text-stone-950 border-brandGreen-600 dark:border-[#0df58b] shadow-[0_0_15px_rgba(13,245,139,0.2)]' 
+                : 'bg-stone-50 dark:bg-[#111827]/40 border-stone-200 dark:border-stone-800 text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-900/60 hover:text-stone-900 dark:hover:text-white hover:border-brandGreen-600/20 dark:hover:border-[#0df58b]/20'
             }`}
             onClick={() => setActiveTab('guide')}
           >
@@ -44,8 +48,8 @@ export default function Blog({ language }) {
           <button 
             className={`px-5 py-2.5 rounded-full border text-xs font-bold font-title transition-all duration-300 ${
               activeTab === 'videos' 
-                ? 'bg-brandBlue-600 dark:bg-brandBlue-500 text-white border-brandBlue-600' 
-                : 'bg-brandBeige-50 dark:bg-stone-900/40 border-stone-200 dark:border-stone-800 text-stone-500 dark:text-stone-400 hover:bg-brandBlue-50 dark:hover:bg-brandBlue-900/20 hover:text-brandBlue-600 dark:hover:text-brandBlue-400'
+                ? 'bg-brandGreen-600 dark:bg-[#0df58b] text-white dark:text-stone-950 border-brandGreen-600 dark:border-[#0df58b] shadow-[0_0_15px_rgba(13,245,139,0.2)]' 
+                : 'bg-stone-50 dark:bg-[#111827]/40 border-stone-200 dark:border-stone-800 text-stone-600 dark:text-stone-400 hover:bg-stone-100 dark:hover:bg-stone-900/60 hover:text-stone-900 dark:hover:text-white hover:border-brandGreen-600/20 dark:hover:border-[#0df58b]/20'
             }`}
             onClick={() => setActiveTab('videos')}
           >
@@ -56,9 +60,9 @@ export default function Blog({ language }) {
         {/* Card Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {activeTab === 'news' && data.news.map((item, index) => (
-            <div className={`bg-brandBeige-50 dark:bg-stone-900/40 border border-stone-200 dark:border-stone-800/85 rounded-2xl overflow-hidden shadow-sm flex flex-col group reveal reveal-scale premium-card-hover ${index % 3 === 0 ? 'delay-100' : index % 3 === 1 ? 'delay-200' : 'delay-300'}`} key={item.id}>
-              <div className="relative aspect-[16/9] w-full bg-stone-100 dark:bg-stone-900 overflow-hidden">
-                <span className="absolute top-3 left-3 bg-brandBlue-100 dark:bg-brandBlue-900/60 text-brandBlue-700 dark:text-brandBlue-300 text-[10px] font-title font-bold px-2.5 py-1 rounded-md z-10">
+            <div className={`bg-stone-50 dark:bg-[#111827]/40 border border-stone-200 dark:border-stone-850 rounded-2xl overflow-hidden shadow-sm flex flex-col group reveal reveal-scale premium-card-hover ${index % 3 === 0 ? 'delay-100' : index % 3 === 1 ? 'delay-200' : 'delay-300'}`} key={item.id}>
+              <div className="relative aspect-[16/9] w-full bg-stone-900 overflow-hidden">
+                <span className="absolute top-3 left-3 bg-white/95 dark:bg-[#111827]/90 backdrop-blur-md border border-brandGreen-600/20 dark:border-[#0df58b]/20 text-brandGreen-700 dark:text-[#0df58b] text-[10px] font-title font-bold px-2.5 py-1 rounded-md z-10">
                   {item.readTime}
                 </span>
                 <img 
@@ -71,18 +75,18 @@ export default function Blog({ language }) {
                   }}
                 />
               </div>
-              <div className="p-6 flex flex-col gap-3 flex-grow">
-                <div className="flex items-center gap-1.5 text-xs text-stone-400 dark:text-stone-500 font-medium">
+              <div className="p-6 flex flex-col gap-3 flex-grow text-left">
+                <div className="flex items-center gap-1.5 text-xs text-stone-500 dark:text-stone-400 font-semibold">
                   <Calendar size={12} />
                   <span>{item.date}</span>
                 </div>
-                <h3 className="text-base font-title font-bold text-stone-900 dark:text-stone-50 leading-snug group-hover:text-brandBlue-600 dark:group-hover:text-brandBlue-400 transition-colors">
+                <h3 className="text-base font-title font-bold text-stone-950 dark:text-stone-50 leading-snug group-hover:text-brandGreen-700 dark:group-hover:text-[#0df58b] transition-colors">
                   {item.title}
                 </h3>
-                <p className="text-sm text-stone-500 dark:text-stone-400 leading-relaxed line-clamp-3">
+                <p className="text-sm text-stone-600 dark:text-stone-400 leading-relaxed line-clamp-3">
                   {item.summary}
                 </p>
-                <a href="#contact" className="inline-flex items-center gap-1 text-xs font-bold text-brandBlue-600 dark:text-brandBlue-400 hover:underline mt-auto self-start" onClick={(e) => {
+                <a href="#contact" className="inline-flex items-center gap-1 text-xs font-bold text-brandGreen-700 dark:text-[#0df58b] hover:underline mt-auto self-start" onClick={(e) => {
                   e.preventDefault();
                   document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
                 }}>
@@ -93,9 +97,9 @@ export default function Blog({ language }) {
           ))}
 
           {activeTab === 'guide' && data.guide.map((item, index) => (
-            <div className={`bg-brandBeige-50 dark:bg-stone-900/40 border border-stone-200 dark:border-stone-800/85 rounded-2xl overflow-hidden shadow-sm flex flex-col group reveal reveal-scale premium-card-hover ${index % 3 === 0 ? 'delay-100' : index % 3 === 1 ? 'delay-200' : 'delay-300'}`} key={item.id}>
-              <div className="relative aspect-[16/9] w-full bg-stone-100 dark:bg-stone-900 overflow-hidden">
-                <span className="absolute top-3 left-3 bg-brandBlue-100 dark:bg-brandBlue-900/60 text-brandBlue-700 dark:text-brandBlue-300 text-[10px] font-title font-bold px-2.5 py-1 rounded-md z-10">
+            <div className={`bg-stone-50 dark:bg-[#111827]/40 border border-stone-200 dark:border-stone-850 rounded-2xl overflow-hidden shadow-sm flex flex-col group reveal reveal-scale premium-card-hover ${index % 3 === 0 ? 'delay-100' : index % 3 === 1 ? 'delay-200' : 'delay-300'}`} key={item.id}>
+              <div className="relative aspect-[16/9] w-full bg-stone-900 overflow-hidden">
+                <span className="absolute top-3 left-3 bg-white/95 dark:bg-[#111827]/90 backdrop-blur-md border border-brandGreen-600/20 dark:border-[#0df58b]/20 text-brandGreen-700 dark:text-[#0df58b] text-[10px] font-title font-bold px-2.5 py-1 rounded-md z-10">
                   {item.readTime}
                 </span>
                 <img 
@@ -108,18 +112,18 @@ export default function Blog({ language }) {
                   }}
                 />
               </div>
-              <div className="p-6 flex flex-col gap-3 flex-grow">
-                <div className="flex items-center gap-1.5 text-xs text-stone-400 dark:text-stone-500 font-medium">
+              <div className="p-6 flex flex-col gap-3 flex-grow text-left">
+                <div className="flex items-center gap-1.5 text-xs text-stone-500 dark:text-stone-400 font-semibold">
                   <Calendar size={12} />
                   <span>{item.date}</span>
                 </div>
-                <h3 className="text-base font-title font-bold text-stone-900 dark:text-stone-50 leading-snug group-hover:text-brandBlue-600 dark:group-hover:text-brandBlue-400 transition-colors">
+                <h3 className="text-base font-title font-bold text-stone-955 dark:text-stone-50 leading-snug group-hover:text-brandGreen-700 dark:group-hover:text-[#0df58b] transition-colors">
                   {item.title}
                 </h3>
-                <p className="text-sm text-stone-500 dark:text-stone-400 leading-relaxed line-clamp-3">
+                <p className="text-sm text-stone-600 dark:text-stone-400 leading-relaxed line-clamp-3">
                   {item.summary}
                 </p>
-                <a href="#contact" className="inline-flex items-center gap-1 text-xs font-bold text-brandBlue-600 dark:text-brandBlue-400 hover:underline mt-auto self-start" onClick={(e) => {
+                <a href="#contact" className="inline-flex items-center gap-1 text-xs font-bold text-brandGreen-700 dark:text-[#0df58b] hover:underline mt-auto self-start" onClick={(e) => {
                   e.preventDefault();
                   document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
                 }}>
@@ -130,10 +134,10 @@ export default function Blog({ language }) {
           ))}
 
           {activeTab === 'videos' && data.videos.map((item, index) => (
-            <div className={`bg-brandBeige-50 dark:bg-stone-900/40 border border-stone-200 dark:border-stone-800/85 rounded-2xl overflow-hidden shadow-sm flex flex-col group reveal reveal-scale premium-card-hover ${index % 3 === 0 ? 'delay-100' : index % 3 === 1 ? 'delay-200' : 'delay-300'}`} key={item.id}>
-              <div className="relative aspect-[16/9] w-full bg-stone-100 dark:bg-stone-900 overflow-hidden">
+            <div className={`bg-stone-50 dark:bg-[#111827]/40 border border-stone-200 dark:border-stone-850 rounded-2xl overflow-hidden shadow-sm flex flex-col group reveal reveal-scale premium-card-hover ${index % 3 === 0 ? 'delay-100' : index % 3 === 1 ? 'delay-200' : 'delay-300'}`} key={item.id}>
+              <div className="relative aspect-[16/9] w-full bg-stone-900 overflow-hidden">
                 {/* Play button overlay */}
-                <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-brandGreen-600 text-white flex items-center justify-center shadow-lg transition-all duration-300 z-10 group-hover:scale-110 group-hover:bg-brandBlue-600">
+                <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-brandGreen-600 text-white dark:bg-[#0df58b] dark:text-stone-950 flex items-center justify-center shadow-lg transition-all duration-300 z-10 group-hover:scale-110 group-hover:bg-brandGreen-700 dark:group-hover:bg-emerald-400">
                   <Play size={16} fill="currentColor" className="ml-0.5" />
                 </div>
                 {/* Dark image filter overlay */}
@@ -151,14 +155,14 @@ export default function Blog({ language }) {
                   }}
                 />
               </div>
-              <div className="p-6 flex flex-col gap-3 flex-grow">
-                <h3 className="text-base font-title font-bold text-stone-900 dark:text-stone-50 leading-snug group-hover:text-brandBlue-600 dark:group-hover:text-brandBlue-400 transition-colors">
+              <div className="p-6 flex flex-col gap-3 flex-grow text-left">
+                <h3 className="text-base font-title font-bold text-stone-950 dark:text-stone-50 leading-snug group-hover:text-brandGreen-700 dark:group-hover:text-[#0df58b] transition-colors">
                   {item.title}
                 </h3>
-                <p className="text-sm text-stone-500 dark:text-stone-400 leading-relaxed line-clamp-3">
+                <p className="text-sm text-stone-600 dark:text-stone-400 leading-relaxed line-clamp-3">
                   {item.desc}
                 </p>
-                <a href="#contact" className="inline-flex items-center gap-1 text-xs font-bold text-brandBlue-600 dark:text-brandBlue-400 hover:underline mt-auto self-start" onClick={(e) => {
+                <a href="#contact" className="inline-flex items-center gap-1 text-xs font-bold text-brandGreen-700 dark:text-[#0df58b] hover:underline mt-auto self-start" onClick={(e) => {
                   e.preventDefault();
                   document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
                 }}>

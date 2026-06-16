@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Phone, Mail, MapPin, Send, MessageSquare, X, CheckCircle } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
 
@@ -79,7 +79,7 @@ export default function Contact({ language }) {
         loanType: 'tinchap',
         message: ''
       });
-    } catch (error) {
+    } catch {
       addToast(
         language === 'vi' ? 'Có lỗi xảy ra, vui lòng thử lại.' : 'An error occurred, please try again.',
         'error'
@@ -92,24 +92,28 @@ export default function Contact({ language }) {
   };
 
   return (
-    <section id="contact" className="py-20 lg:py-28 bg-white dark:bg-brandBeige-950">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="contact" className="py-20 lg:py-28 bg-white dark:bg-[#0b0f19] relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute top-1/2 left-0 -translate-y-1/2 w-80 h-80 bg-[#0df58b]/5 rounded-full filter blur-[100px] pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        
         {/* Header */}
         <div className="text-center mb-16 reveal">
-          <span className="block font-title text-brandGreen-600 dark:text-brandGreen-600 text-xs font-bold uppercase tracking-widest mb-2">
+          <span className="block font-title text-brandGreen-700 dark:text-[#0df58b] text-xs font-bold uppercase tracking-[0.25em] mb-3">
             {data.subtitle}
           </span>
-          <h2 className="inline-block text-3xl md:text-4xl font-title font-bold text-stone-900 dark:text-stone-50 relative pb-4 after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-16 after:h-1 after:bg-brandBlue-600 dark:after:bg-brandBlue-500 after:rounded">
+          <h2 className="text-3xl md:text-5xl font-title font-bold text-stone-950 dark:text-stone-50">
             {data.title}
           </h2>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           {/* Form Side */}
-          <div className="lg:col-span-7 bg-brandBeige-50 dark:bg-stone-900/40 border border-stone-200 dark:border-stone-800/80 p-8 rounded-3xl shadow-sm reveal reveal-left">
-            <h3 className="mb-6 font-bold text-lg text-stone-900 dark:text-stone-50">{data.formTitle}</h3>
+          <div className="lg:col-span-7 bg-stone-50 dark:bg-[#111827]/40 border border-stone-200 dark:border-stone-850 p-8 rounded-3xl shadow-sm reveal reveal-left">
+            <h3 className="mb-6 font-bold text-lg text-stone-950 dark:text-stone-50 text-left">{data.formTitle}</h3>
             
-            <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
+            <form className="flex flex-col gap-5 text-left" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {/* Name */}
                 <div className="flex flex-col gap-1.5">
@@ -122,7 +126,7 @@ export default function Contact({ language }) {
                     placeholder={data.formFields.placeholderName}
                     value={formData.name}
                     onChange={handleInputChange}
-                    className="h-11 px-4 rounded-xl border border-stone-200 dark:border-stone-850 bg-white dark:bg-stone-950 text-sm focus:outline-none focus:border-brandBlue-600 dark:focus:border-brandBlue-500 transition-colors"
+                    className="h-11 px-4 rounded-xl border border-stone-300 dark:border-stone-800 bg-white dark:bg-[#090d16] text-stone-800 dark:text-stone-250 text-sm focus:outline-none focus:border-brandGreen-600 dark:focus:border-[#0df58b] transition-colors"
                   />
                 </div>
                 
@@ -137,7 +141,7 @@ export default function Contact({ language }) {
                     placeholder={data.formFields.placeholderPhone}
                     value={formData.phone}
                     onChange={handleInputChange}
-                    className="h-11 px-4 rounded-xl border border-stone-200 dark:border-stone-850 bg-white dark:bg-stone-950 text-sm focus:outline-none focus:border-brandBlue-600 dark:focus:border-brandBlue-500 transition-colors"
+                    className="h-11 px-4 rounded-xl border border-stone-300 dark:border-stone-800 bg-white dark:bg-[#090d16] text-stone-800 dark:text-stone-250 text-sm focus:outline-none focus:border-brandGreen-600 dark:focus:border-[#0df58b] transition-colors"
                   />
                 </div>
               </div>
@@ -152,7 +156,7 @@ export default function Contact({ language }) {
                   placeholder={data.formFields.placeholderEmail}
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="h-11 px-4 rounded-xl border border-stone-200 dark:border-stone-850 bg-white dark:bg-stone-950 text-sm focus:outline-none focus:border-brandBlue-600 dark:focus:border-brandBlue-500 transition-colors"
+                  className="h-11 px-4 rounded-xl border border-stone-300 dark:border-stone-800 bg-white dark:bg-[#090d16] text-stone-800 dark:text-stone-250 text-sm focus:outline-none focus:border-brandGreen-600 dark:focus:border-[#0df58b] transition-colors"
                 />
               </div>
 
@@ -164,16 +168,16 @@ export default function Contact({ language }) {
                   name="loanType"
                   value={formData.loanType}
                   onChange={handleInputChange}
-                  className="h-11 px-4 rounded-xl border border-stone-200 dark:border-stone-850 bg-white dark:bg-stone-950 text-sm focus:outline-none focus:border-brandBlue-600 dark:focus:border-brandBlue-500 transition-colors appearance-none cursor-pointer"
+                  className="h-11 px-4 rounded-xl border border-stone-300 dark:border-stone-800 bg-white dark:bg-[#090d16] text-stone-800 dark:text-stone-250 text-sm focus:outline-none focus:border-brandGreen-600 dark:focus:border-[#0df58b] transition-colors appearance-none cursor-pointer"
                   style={{
-                    backgroundImage: `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2378716c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>")`,
+                    backgroundImage: `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23a8a29e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>")`,
                     backgroundRepeat: 'no-repeat',
                     backgroundPosition: 'right 16px center',
                     backgroundSize: '16px'
                   }}
                 >
                   {data.loanOptions.map((opt) => (
-                    <option value={opt.value} key={opt.value}>{opt.label}</option>
+                    <option value={opt.value} key={opt.value} className="bg-white dark:bg-[#090d16] text-stone-800 dark:text-stone-300">{opt.label}</option>
                   ))}
                 </select>
               </div>
@@ -188,61 +192,61 @@ export default function Contact({ language }) {
                   placeholder={data.formFields.placeholderMessage}
                   value={formData.message}
                   onChange={handleInputChange}
-                  className="p-4 rounded-xl border border-stone-200 dark:border-stone-850 bg-white dark:bg-stone-950 text-sm focus:outline-none focus:border-brandBlue-600 dark:focus:border-brandBlue-500 transition-colors resize-none"
+                  className="p-4 rounded-xl border border-stone-300 dark:border-stone-800 bg-white dark:bg-[#090d16] text-stone-800 dark:text-stone-250 text-sm focus:outline-none focus:border-brandGreen-600 dark:focus:border-[#0df58b] transition-colors resize-none"
                 ></textarea>
               </div>
 
               <button 
                 type="submit" 
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg font-semibold text-sm text-white bg-brandBlue-600 hover:bg-brandBlue-700 hover:shadow transition-all duration-300 cursor-pointer self-start"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg font-bold font-title text-xs sm:text-sm text-white dark:text-stone-950 bg-brandGreen-600 hover:bg-brandGreen-700 dark:bg-[#0df58b] dark:hover:bg-emerald-400 hover:shadow-[0_0_15px_rgba(13,245,139,0.25)] transition-all duration-300 cursor-pointer self-start"
               >
-                <Send size={16} />
+                <Send size={14} className="stroke-[2.5]" />
                 {data.formFields.submit}
               </button>
             </form>
           </div>
 
           {/* Info Side */}
-          <div className="lg:col-span-5 flex flex-col gap-8 reveal reveal-right delay-200">
+          <div className="lg:col-span-5 flex flex-col gap-8 reveal reveal-right delay-200 text-left">
             <div className="flex flex-col gap-4">
               {/* Phone item */}
-              <div className="flex gap-4 items-start bg-brandBeige-50 dark:bg-stone-900/40 border border-stone-200 dark:border-stone-800/80 p-5 rounded-2xl premium-card-hover">
-                <div className="w-11 h-11 rounded-xl bg-brandGreen-50 dark:bg-brandGreen-950/20 text-brandGreen-600 flex items-center justify-center flex-shrink-0">
+              <div className="flex gap-4 items-start bg-stone-50 dark:bg-[#111827]/40 border border-stone-200 dark:border-stone-850 p-5 rounded-2xl premium-card-hover">
+                <div className="w-11 h-11 rounded-xl bg-brandGreen-600/10 dark:bg-[#0df58b]/10 text-brandGreen-700 dark:text-[#0df58b] flex items-center justify-center flex-shrink-0">
                   <Phone size={18} />
                 </div>
                 <div className="flex flex-col">
-                  <h5 className="font-bold text-sm text-stone-900 dark:text-stone-100 leading-snug">
+                  <h5 className="font-bold text-sm text-stone-950 dark:text-stone-100 leading-snug">
                     {language === 'vi' ? 'Số điện thoại' : 'Phone number'}
                   </h5>
-                  <a href={`tel:${data.phone.replace(/\s+/g, '')}`} className="text-sm text-stone-500 dark:text-stone-400 hover:text-brandBlue-600 transition-colors mt-1">
+                  <a href={`tel:${data.phone.replace(/\s+/g, '')}`} className="text-sm text-stone-600 dark:text-stone-400 hover:text-brandGreen-700 dark:hover:text-[#0df58b] transition-colors mt-1 font-mono font-semibold">
                     {data.phone}
                   </a>
                 </div>
               </div>
 
               {/* Email item */}
-              <div className="flex gap-4 items-start bg-brandBeige-50 dark:bg-stone-900/40 border border-stone-200 dark:border-stone-800/80 p-5 rounded-2xl premium-card-hover">
-                <div className="w-11 h-11 rounded-xl bg-brandGreen-50 dark:bg-brandGreen-950/20 text-brandGreen-600 flex items-center justify-center flex-shrink-0">
+              <div className="flex gap-4 items-start bg-stone-50 dark:bg-[#111827]/40 border border-stone-200 dark:border-stone-850 p-5 rounded-2xl premium-card-hover">
+                <div className="w-11 h-11 rounded-xl bg-brandGreen-600/10 dark:bg-[#0df58b]/10 text-brandGreen-700 dark:text-[#0df58b] flex items-center justify-center flex-shrink-0">
                   <Mail size={18} />
                 </div>
                 <div className="flex flex-col">
-                  <h5 className="font-bold text-sm text-stone-900 dark:text-stone-100 leading-snug">Email</h5>
-                  <a href={`mailto:${data.email}`} className="text-sm text-stone-500 dark:text-stone-400 hover:text-brandBlue-600 transition-colors mt-1">
+                  <h5 className="font-bold text-sm text-stone-955 dark:text-stone-100 leading-snug">Email</h5>
+                  <a href={`mailto:${data.email}`} className="text-sm text-stone-600 dark:text-stone-400 hover:text-brandGreen-700 dark:hover:text-[#0df58b] transition-colors mt-1 font-mono font-semibold">
                     {data.email}
                   </a>
                 </div>
               </div>
 
               {/* Address item */}
-              <div className="flex gap-4 items-start bg-brandBeige-50 dark:bg-stone-900/40 border border-stone-200 dark:border-stone-800/80 p-5 rounded-2xl premium-card-hover">
-                <div className="w-11 h-11 rounded-xl bg-brandGreen-50 dark:bg-brandGreen-950/20 text-brandGreen-600 flex items-center justify-center flex-shrink-0">
+              <div className="flex gap-4 items-start bg-stone-50 dark:bg-[#111827]/40 border border-stone-200 dark:border-stone-850 p-5 rounded-2xl premium-card-hover">
+                <div className="w-11 h-11 rounded-xl bg-brandGreen-600/10 dark:bg-[#0df58b]/10 text-brandGreen-700 dark:text-[#0df58b] flex items-center justify-center flex-shrink-0">
                   <MapPin size={18} />
                 </div>
                 <div className="flex flex-col">
-                  <h5 className="font-bold text-sm text-stone-900 dark:text-stone-100 leading-snug">
+                  <h5 className="font-bold text-sm text-stone-955 dark:text-stone-100 leading-snug">
                     {language === 'vi' ? 'Địa chỉ làm việc' : 'Office address'}
                   </h5>
-                  <p className="text-sm text-stone-500 dark:text-stone-400 mt-1 leading-relaxed">
+                  <p className="text-sm text-stone-600 dark:text-stone-400 mt-1 leading-relaxed">
                     {data.address}
                   </p>
                 </div>
@@ -251,11 +255,11 @@ export default function Contact({ language }) {
 
             {/* Socials buttons */}
             <div className="flex flex-col gap-3">
-              <h4 className="font-bold text-sm text-stone-800 dark:text-stone-200">
+              <h4 className="font-bold text-sm text-stone-700 dark:text-stone-300">
                 {language === 'vi' ? 'Kênh liên hệ nhanh' : 'Quick Connect Channels'}
               </h4>
               <div className="flex gap-3">
-                <a href={data.socials.zalo} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg border font-bold text-xs transition-colors duration-300 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white">
+                <a href={data.socials.zalo} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg border font-bold text-xs transition-colors duration-300 border-blue-500 text-blue-450 hover:bg-blue-500 hover:text-white">
                   <MessageSquare size={14} />
                   <span>Zalo</span>
                 </a>
@@ -275,11 +279,11 @@ export default function Contact({ language }) {
             </div>
 
             {/* Map */}
-            <div className="rounded-2xl overflow-hidden border border-stone-200 dark:border-stone-800 h-60 shadow-sm">
+            <div className="rounded-2xl overflow-hidden border border-stone-200 dark:border-stone-850 h-60 shadow-sm">
               <iframe
                 title="Office Map"
                 src={data.mapUrl}
-                className="w-full h-full border-none"
+                className="w-full h-full border-none dark:invert-[0.9] dark:hue-rotate-180"
                 allowFullScreen=""
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
@@ -294,11 +298,11 @@ export default function Contact({ language }) {
         {toasts.map((toast) => (
           <div 
             key={toast.id} 
-            className={`bg-brandBeige-50 dark:bg-stone-900 border-l-4 text-stone-900 dark:text-stone-100 shadow-xl p-4 rounded-r-lg flex items-center gap-3 min-w-[280px] max-w-sm border-t border-r border-b border-stone-200 dark:border-stone-800 animate-fade-in ${
-              toast.type === 'error' ? 'border-l-red-500' : 'border-l-brandGreen-600'
+            className={`bg-white/95 dark:bg-[#111827]/95 text-stone-900 dark:text-stone-100 shadow-xl p-4 rounded-r-lg flex items-center gap-3 min-w-[280px] max-w-sm border border-stone-200 dark:border-stone-800 animate-fade-in ${
+              toast.type === 'error' ? 'border-l-4 border-l-red-500' : 'border-l-4 border-l-brandGreen-600 dark:border-l-[#0df58b]'
             }`}
           >
-            {toast.type === 'success' && <CheckCircle size={18} className="text-brandGreen-600" />}
+            {toast.type === 'success' && <CheckCircle size={18} className="text-brandGreen-600 dark:text-[#0df58b]" />}
             <span className="text-xs font-semibold flex-grow">{toast.message}</span>
             <button className="text-stone-400 hover:text-stone-600 dark:hover:text-stone-200 cursor-pointer" onClick={() => removeToast(toast.id)}>
               <X size={14} />

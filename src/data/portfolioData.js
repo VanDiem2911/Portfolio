@@ -17,22 +17,23 @@ export const portfolioData = {
     hero: {
       name: "Nguyễn Văn A",
       title: "Chuyên viên Hỗ trợ Vay vốn Cá nhân & Doanh nghiệp",
-      slogan: "Đồng hành cùng khách hàng trên hành trình hiện thực hóa kế hoạch tài chính.",
+      slogan: "Luôn hỗ trợ bạn khi bạn cần nguồn vốn.",
       ctaPrimary: "Đăng ký tư vấn",
       ctaSecondary: "Liên hệ ngay",
+      ctaScroll: "Hiểu thêm về tôi",
       stats: [
         { value: "500+", label: "Hồ sơ hỗ trợ thành công" },
         { value: "5+", label: "Năm kinh nghiệm tín dụng" },
         { value: "95%", label: "Khách hàng hài lòng & phản hồi tốt" }
       ],
-      avatar: "/images/portrait.jpg"
+      avatar: "/images/Anh-profile-.jpg"
     },
     about: {
       title: "Giới thiệu bản thân",
       intro: "Chào bạn, tôi là Nguyễn Văn A - Chuyên viên tư vấn tài chính và hỗ trợ vay vốn chuyên nghiệp. Với hơn 5 năm kinh nghiệm làm việc tại các ngân hàng lớn hàng đầu Việt Nam, tôi tự hào đã đồng hành và hỗ trợ hơn 500 khách hàng cá nhân cũng như doanh nghiệp tiếp cận được nguồn vốn vay an toàn, nhanh chóng và tối ưu nhất về mặt chi phí.",
       missionTitle: "Sứ mệnh của tôi",
       missionText: "Cung cấp giải pháp tài chính minh bạch, đơn giản hóa quy trình thủ tục ngân hàng để mọi cá nhân và doanh nghiệp đều có thể dễ dàng tiếp cận nguồn vốn phù hợp, hiện thực hóa các kế hoạch mua nhà, mua ô tô, mở rộng sản xuất kinh doanh hay tiêu dùng cá nhân.",
-      avatar: "/images/about_avatar.jpg",
+      avatar: "/images/Anh-profile.jpg",
       timelineTitle: "Chặng đường phát triển",
       timeline: [
         {
@@ -355,12 +356,13 @@ export const portfolioData = {
       slogan: "Accompanying clients on the journey to realizing their financial plans.",
       ctaPrimary: "Request Advice",
       ctaSecondary: "Contact Now",
+      ctaScroll: "Learn more about me",
       stats: [
         { value: "500+", label: "Successful Loan Files" },
         { value: "5+ years", label: "Credit Experience" },
         { value: "95%", label: "Client Satisfaction Rate" }
       ],
-      avatar: "/images/portrait.jpg"
+      avatar:"/images/Anh-profile-.jpg"
     },
     about: {
       title: "About Me",
@@ -368,7 +370,7 @@ export const portfolioData = {
       intro: "Hello, I am Nguyen Van A - a professional financial advisor and bank loan specialist. With over 5 years of experience at Vietnam's leading commercial banks, I am proud to have accompanied and assisted more than 500 individual and business clients in accessing safe, quick, and cost-effective credit solutions.",
       missionTitle: "My Mission",
       missionText: "To provide transparent financial solutions and simplify complex banking procedures so that every individual and business can easily secure the right capital, realizing their dreams of owning a home, driving a car, expanding business operations, or fulfilling personal needs.",
-      avatar: "/images/about_avatar.jpg",
+      avatar: "/images/Anh-profile.jpg",
       timelineTitle: "Professional Timeline",
       timeline: [
         {

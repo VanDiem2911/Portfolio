@@ -1,4 +1,3 @@
-import React from 'react';
 import { Phone, MessageCircle } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
 
@@ -30,14 +29,14 @@ export default function FloatingContact({ language }) {
       {/* Phone Button */}
       <a 
         href={`tel:${phoneClean}`}
-        className="w-14 h-14 rounded-full bg-gradient-to-r from-brandGreen-600 to-brandGreen-700 text-white flex items-center justify-center shadow-lg hover:scale-110 hover:shadow-xl transition-all duration-300 relative group"
+        className="w-14 h-14 rounded-full bg-brandGreen-600 dark:bg-[#0df58b] text-white dark:text-stone-950 flex items-center justify-center shadow-lg hover:scale-110 hover:shadow-[0_0_20px_rgba(13,245,139,0.4)] transition-all duration-300 relative group"
         aria-label="Call Phone"
       >
         {/* Pulse animations */}
-        <span className="absolute inset-0 rounded-full bg-brandGreen-600/30 animate-ping opacity-75 -z-10" />
+        <span className="absolute inset-0 rounded-full bg-brandGreen-600/30 dark:bg-[#0df58b]/30 animate-ping opacity-75 -z-10" />
         
         {/* Tooltip */}
-        <span className="absolute right-16 top-1/2 -translate-y-1/2 bg-stone-900/90 dark:bg-stone-800/90 text-white text-xs font-bold font-title px-3 py-1.5 rounded-lg opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap shadow-md">
+        <span className="absolute right-16 top-1/2 -translate-y-1/2 bg-white dark:bg-[#111827] border border-stone-200 dark:border-stone-800 text-stone-900 dark:text-stone-100 text-xs font-bold font-title px-3 py-1.5 rounded-lg opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap shadow-md">
           {language === 'vi' ? `Gọi ngay: ${data.phone}` : `Call: ${data.phone}`}
         </span>
         
