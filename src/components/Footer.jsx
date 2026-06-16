@@ -22,8 +22,8 @@ export default function Footer({ language }) {
 
   const name = portfolioData[language].hero.name;
   const nameParts = name.split(' ');
-  const monogram = nameParts[0] ? nameParts[0].charAt(0) : 'A';
-  const restOfName = nameParts.slice(1).join(' ') || 'Van A';
+  const monogram = nameParts[0] ? nameParts[0].charAt(0) : 'P';
+  const restOfName = nameParts.slice(1).join(' ') || 'Thi Thu';
 
   return (
     <footer className="bg-[#fdfbf7] dark:bg-[#090d16] border-t border-stone-200 dark:border-stone-850 py-16 pb-8 text-left">

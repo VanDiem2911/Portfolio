@@ -10,10 +10,10 @@ export default function Header({ language, setLanguage, theme, toggleTheme }) {
   const t = portfolioData[language].nav;
   const name = portfolioData[language].hero.name;
 
-  // Split name for dynamic monogram logo: e.g. "Nguyễn Văn A" -> monogram "N" & text "Văn A"
+  // Split name for dynamic monogram logo: e.g. "Phạm Thị Thu" -> monogram "P" & text "Thị Thu"
   const nameParts = name.split(' ');
-  const monogram = nameParts[0] ? nameParts[0].charAt(0) : 'A';
-  const restOfName = nameParts.slice(1).join(' ') || 'Van A';
+  const monogram = nameParts[0] ? nameParts[0].charAt(0) : 'P';
+  const restOfName = nameParts.slice(1).join(' ') || 'Thi Thu';
 
   useEffect(() => {
     const handleScroll = () => {

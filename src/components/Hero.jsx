@@ -113,8 +113,8 @@ export default function Hero({ language }) {
 
             <p className="text-base sm:text-lg text-stone-600 dark:text-stone-300 max-w-lg leading-relaxed mt-2">
               {language === 'vi'
-                ? 'Chào bạn, tôi là Nguyễn Văn A - Trưởng nhóm tư vấn tài chính chuyên nghiệp với hơn 5 năm kinh nghiệm. Đồng hành cùng khách hàng sở hữu ngôi nhà mơ ước và tiếp cận nguồn vốn kinh doanh tối ưu nhất.'
-                : "Hi, I'm Nguyen Van A - a professional financial advisor & senior credit specialist based in Vietnam. Helping you secure the best mortgage rates and business capital solutions."}
+                ? 'Chào bạn, tôi là Phạm Thị Thu - Trưởng nhóm tư vấn tài chính chuyên nghiệp với hơn 5 năm kinh nghiệm. Đồng hành cùng khách hàng sở hữu ngôi nhà mơ ước và tiếp cận nguồn vốn kinh doanh tối ưu nhất.'
+                : "Hi, I'm Pham Thi Thu - a professional financial advisor & senior credit specialist based in Vietnam. Helping you secure the best mortgage rates and business capital solutions."}
             </p>
 
             {/* Action Buttons */}
@@ -130,12 +130,12 @@ export default function Hero({ language }) {
           </div>
 
           {/* Right Hero Portrait Image Column - Visible in flow on mobile, hidden on desktop */}
-          <div className="lg:col-span-5 w-full max-w-md mx-auto lg:max-w-none lg:opacity-0 lg:pointer-events-none">
-            <div className="relative w-full h-[55vh] flex items-end justify-center">
-              <img 
-                src={data.avatar} 
-                alt={data.name} 
-                className="relative z-10 w-auto h-full max-h-full object-contain object-bottom select-none filter drop-shadow-[0_15px_30px_rgba(0,0,0,0.25)]"
+          <div className="lg:col-span-5 w-full max-w-md mx-auto lg:max-w-none lg:opacity-0 lg:pointer-events-none flex justify-center items-center py-6">
+            <div className="relative w-[280px] h-[350px] sm:w-[350px] sm:h-[450px] md:w-[380px] md:h-[490px] morphing-blob border-8 border-[#0df58b] bg-stone-50 dark:bg-[#16222f] overflow-hidden shadow-[0_0_50px_rgba(13,245,139,0.1)]">
+              <img
+                src={data.avatar}
+                alt={data.name}
+                className="w-full h-full object-cover object-[center_18%] scale-[0.95] select-none"
                 onError={(e) => {
                   e.target.onerror = null;
                   e.target.src = "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=600";
@@ -147,13 +147,13 @@ export default function Hero({ language }) {
         </div>
       </div>
 
-      {/* Absolute positioned profile cutout centered exactly on the vertical split boundary (60% mark) on desktop */}
-      <div className="absolute bottom-20 left-[60%] -translate-x-1/2 z-10 w-full max-w-[380px] lg:max-w-[420px] xl:max-w-[460px] h-[75vh] xl:h-[80vh] hidden lg:flex items-end justify-center pointer-events-none">
-        <div className="w-full h-full flex items-end justify-center reveal reveal-right delay-200">
-          <img 
-            src={data.avatar} 
-            alt={data.name} 
-            className="relative z-10 w-auto h-full max-h-full object-contain object-bottom select-none filter drop-shadow-[0_20px_40px_rgba(0,0,0,0.35)] hover:scale-[1.02] transition-transform duration-500"
+      {/* Absolute positioned profile image with border centered exactly on the vertical split boundary (60% mark) on desktop */}
+      <div className="absolute top-[52%] -translate-y-1/2 left-[60%] -translate-x-1/2 z-10 hidden lg:flex items-center justify-center pointer-events-none">
+        <div className="reveal reveal-right delay-200 w-[380px] h-[490px] xl:w-[440px] xl:h-[570px] morphing-blob border-8 border-[#0df58b] bg-stone-50 dark:bg-[#16222f] overflow-hidden shadow-[0_0_50px_rgba(13,245,139,0.2)]">
+          <img
+            src={data.avatar}
+            alt={data.name}
+            className="w-full h-full object-cover object-top scale-100 select-none"
             onError={(e) => {
               e.target.onerror = null;
               e.target.src = "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=600";

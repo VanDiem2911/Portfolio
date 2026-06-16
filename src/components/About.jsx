@@ -23,24 +23,24 @@ export default function About({ language }) {
     <section id="about" className="py-20 lg:py-28 bg-white dark:bg-[#090d16] relative overflow-hidden">
       {/* Background gradients */}
       <div className="absolute top-1/2 left-0 -translate-y-1/2 w-72 h-72 bg-[#0df58b]/5 rounded-full filter blur-[100px] pointer-events-none" />
-      
+
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          
+
           {/* Left Column: Image & Orbiting Stats Badges */}
           <div className="lg:col-span-5 w-full max-w-md mx-auto lg:max-w-none flex justify-center items-center relative py-12 px-6 reveal reveal-left">
             {/* The Neon Green Morphing Blob Background Element */}
             <div className="absolute w-[80%] aspect-square bg-gradient-to-tr from-[#0df58b]/10 to-transparent rounded-full filter blur-xl opacity-60 animate-pulse" />
-            
+
             {/* Hexagon decoration patterns */}
             <div className="absolute inset-0 opacity-15 pointer-events-none hex-grid-pattern" />
 
             {/* Main Image Frame (Organic morphing shape with green border) */}
-            <div className="relative w-64 h-80 sm:w-72 sm:h-96 md:w-80 md:h-[420px] morphing-blob border-4 border-[#0df58b] bg-stone-100 dark:bg-[#16222f] overflow-hidden shadow-[0_0_50px_rgba(13,245,139,0.1)]">
-              <img 
-                src={data.avatar} 
-                alt={data.title} 
-                className="w-full h-full object-cover scale-105"
+            <div className="relative w-[280px] h-[350px] sm:w-[350px] sm:h-[450px] md:w-[380px] md:h-[490px] morphing-blob border-8 border-[#0df58b] bg-stone-100 dark:bg-[#16222f] overflow-hidden shadow-[0_0_50px_rgba(13,245,139,0.1)]">
+              <img
+                src={data.avatar}
+                alt={data.title}
+                className="w-full h-full object-cover object-[center_8%] scale-100"
                 onError={(e) => {
                   e.target.onerror = null;
                   e.target.src = "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=600";
@@ -56,7 +56,7 @@ export default function About({ language }) {
                 <span className="text-[10px] font-semibold text-stone-500 dark:text-stone-400 mt-1 leading-tight">{stats[1].label}</span>
               </div>
             )}
-            
+
             {/* Badge 2: Bottom Left */}
             {stats[0] && (
               <div className="absolute bottom-12 left-0 sm:left-4 bg-white/95 dark:bg-[#111827]/90 backdrop-blur-md border border-stone-200 dark:border-[#0df58b]/30 shadow-2xl rounded-2xl p-4 flex flex-col items-center text-center w-32 animate-float-delay z-10">
@@ -79,19 +79,19 @@ export default function About({ language }) {
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-brandGreen-700 dark:text-[#0df58b]">
               {language === 'vi' ? 'HÃY ĐỂ TÔI GIỚI THIỆU BẢN THÂN' : 'LET ME INTRODUCE MYSELF'}
             </span>
-            
+
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-title font-bold text-stone-950 dark:text-stone-50">
               {data.title}
             </h2>
-            
+
             <h3 className="text-lg sm:text-xl font-bold font-title text-brandGreen-700 dark:text-[#0df58b]">
               {language === 'vi' ? 'Đồng hành cùng bạn trên hành trình tài chính.' : 'A story of dedication and financial partnership.'}
             </h3>
-            
+
             <p className="text-stone-600 dark:text-stone-300 leading-relaxed text-sm sm:text-base">
               {data.intro}
             </p>
-            
+
             {/* Mission block */}
             <div className="bg-stone-50 dark:bg-[#111827]/60 border-l-4 border-brandGreen-600 dark:border-[#0df58b] p-5 rounded-r-xl border border-y-stone-100 border-r-stone-100 dark:border-y-transparent dark:border-r-transparent">
               <h4 className="font-title font-bold text-brandGreen-700 dark:text-[#0df58b] mb-1.5 text-sm uppercase tracking-wider">
@@ -101,19 +101,19 @@ export default function About({ language }) {
                 {data.missionText}
               </p>
             </div>
-            
+
             {/* Contact detail box */}
             <div className="border-t border-stone-200 dark:border-stone-800 pt-6 mt-2 flex flex-col gap-2">
               <h4 className="text-sm font-bold font-title uppercase tracking-wider text-stone-500 dark:text-stone-400">
                 {language === 'vi' ? 'Liên hệ nhanh' : 'Quick Contact'}
               </h4>
               <p className="text-xs text-stone-550 dark:text-stone-400 max-w-md leading-relaxed">
-                {language === 'vi' 
+                {language === 'vi'
                   ? 'Bạn đang tìm kiếm giải pháp tài chính tốt nhất và nhanh chóng? Hãy gửi yêu cầu hoặc liên hệ trực tiếp với tôi.'
                   : 'Are you looking for the best and fastest financial solutions? Drop me a message or contact me directly.'}
               </p>
-              <a 
-                href={`mailto:${portfolioData[language].contact.email}`} 
+              <a
+                href={`mailto:${portfolioData[language].contact.email}`}
                 className="text-base sm:text-lg font-mono font-bold text-brandGreen-700 dark:text-[#0df58b] hover:underline hover:text-brandGreen-600 dark:hover:text-emerald-400 transition-colors self-start mt-1"
               >
                 {portfolioData[language].contact.email}
@@ -122,8 +122,8 @@ export default function About({ language }) {
 
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-4 mt-4">
-              <a 
-                href="#contact" 
+              <a
+                href="#contact"
                 onClick={(e) => {
                   e.preventDefault();
                   document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
@@ -132,8 +132,8 @@ export default function About({ language }) {
               >
                 {language === 'vi' ? 'ĐĂNG KÝ TƯ VẤN' : 'HIRE ME'}
               </a>
-              <a 
-                href="#resume" 
+              <a
+                href="#resume"
                 onClick={(e) => {
                   e.preventDefault();
                   document.getElementById('resume').scrollIntoView({ behavior: 'smooth' });
@@ -153,8 +153,8 @@ export default function About({ language }) {
           </h4>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {strengths[language].map((item, i) => (
-              <div 
-                key={i} 
+              <div
+                key={i}
                 className="bg-stone-50 dark:bg-[#111827]/40 border border-stone-200 dark:border-stone-850 p-6 rounded-2xl premium-card-hover group flex flex-col gap-2 relative overflow-hidden"
               >
                 <span className="absolute top-0 left-0 w-full h-[3px] bg-brandGreen-600 dark:bg-[#0df58b] scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300" />

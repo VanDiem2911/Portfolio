@@ -1,7 +1,7 @@
 export const portfolioData = {
   vi: {
     meta: {
-      title: "Nguyễn Văn A - Chuyên viên Hỗ trợ Vay vốn Ngân hàng Chuyên nghiệp",
+      title: "Phạm Thị Thu - Chuyên viên Hỗ trợ Vay vốn Ngân hàng Chuyên nghiệp",
       description: "Đồng hành cùng khách hàng trên hành trình hiện thực hóa kế hoạch tài chính. Tư vấn vay mua nhà, vay tín chấp, vay mua ô tô, vay sản xuất kinh doanh lãi suất ưu đãi."
     },
     nav: {
@@ -14,7 +14,7 @@ export const portfolioData = {
       consultBtn: "Đăng ký tư vấn"
     },
     hero: {
-      name: "Nguyễn Văn A",
+      name: "Phạm Thị Thu",
       title: "Chuyên viên Hỗ trợ Vay vốn Cá nhân & Doanh nghiệp",
       slogan: "Luôn hỗ trợ bạn khi bạn cần nguồn vốn.",
       ctaPrimary: "Đăng ký tư vấn",
@@ -29,10 +29,10 @@ export const portfolioData = {
     },
     about: {
       title: "Giới thiệu bản thân",
-      intro: "Chào bạn, tôi là Nguyễn Văn A - Chuyên viên tư vấn tài chính và hỗ trợ vay vốn chuyên nghiệp. Với hơn 5 năm kinh nghiệm làm việc tại các ngân hàng lớn hàng đầu Việt Nam, tôi tự hào đã đồng hành và hỗ trợ hơn 500 khách hàng cá nhân cũng như doanh nghiệp tiếp cận được nguồn vốn vay an toàn, nhanh chóng và tối ưu nhất về mặt chi phí.",
+      intro: "Chào bạn, tôi là Phạm Thị Thu - Chuyên viên tư vấn tài chính và hỗ trợ vay vốn chuyên nghiệp. Với hơn 5 năm kinh nghiệm làm việc tại các ngân hàng lớn hàng đầu Việt Nam, tôi tự hào đã đồng hành và hỗ trợ hơn 500 khách hàng cá nhân cũng như doanh nghiệp tiếp cận được nguồn vốn vay an toàn, nhanh chóng và tối ưu nhất về mặt chi phí.",
       missionTitle: "Sứ mệnh của tôi",
       missionText: "Cung cấp giải pháp tài chính minh bạch, đơn giản hóa quy trình thủ tục ngân hàng để mọi cá nhân và doanh nghiệp đều có thể dễ dàng tiếp cận nguồn vốn phù hợp, hiện thực hóa các kế hoạch mua nhà, mua ô tô, mở rộng sản xuất kinh doanh hay tiêu dùng cá nhân.",
-      avatar: "/images/Anh-profile.jpg",
+      avatar: "/images/Anh-profile1.jpg",
       timelineTitle: "Chặng đường phát triển",
       timeline: [
         {
@@ -163,21 +163,21 @@ export const portfolioData = {
       list: [
         {
           stars: 5,
-          text: "Anh A hỗ trợ rất tận tình, hồ sơ vay mua nhà của gia đình tôi thuộc diện khó chứng minh thu nhập nhưng đã được anh hướng dẫn chuẩn bị giấy tờ chu đáo và duyệt nhanh hơn mong đợi rất nhiều.",
+          text: "Chị Thu hỗ trợ rất tận tình, hồ sơ vay mua nhà của gia đình tôi thuộc diện khó chứng minh thu nhập nhưng đã được chị hướng dẫn chuẩn bị giấy tờ chu đáo và duyệt nhanh hơn mong đợi rất nhiều.",
           author: "Chị Lan",
           role: "Kinh doanh tự do, TP.HCM",
           avatar: "/images/customer3.jpg"
         },
         {
           stars: 5,
-          text: "Nhờ sự hỗ trợ tư vấn của anh A về phương án vay vốn kinh doanh bổ sung, doanh nghiệp của tôi đã kịp thời nhập lô hàng Tết phục vụ thị trường đúng lúc. Lãi suất rất tốt, quy trình giải ngân cực kỳ gọn lẹ.",
+          text: "Nhờ sự hỗ trợ tư vấn của chị Thu về phương án vay vốn kinh doanh bổ sung, doanh nghiệp của tôi đã kịp thời nhập lô hàng Tết phục vụ thị trường đúng lúc. Lãi suất rất tốt, quy trình giải ngân cực kỳ gọn lẹ.",
           author: "Anh Minh",
           role: "Giám đốc Công ty Xuất Nhập khẩu, Hà Nội",
           avatar: "/images/customer1.jpg"
         },
         {
           stars: 5,
-          text: "Tôi đã đi hỏi nhiều ngân hàng nhưng đều bị vướng thủ tục rườm rà. Tìm đến anh A qua giới thiệu, tôi được giải đáp tường tận tất cả các bước vay tín chấp. Cực kỳ ấn tượng với phong cách làm việc chuyên nghiệp, chu đáo của anh.",
+          text: "Tôi đã đi hỏi nhiều ngân hàng nhưng đều bị vướng thủ tục rườm rà. Tìm đến chị Thu qua giới thiệu, tôi được giải đáp tường tận tất cả các bước vay tín chấp. Cực kỳ ấn tượng với phong cách làm việc chuyên nghiệp, chu đáo của chị.",
           author: "Chị Hạnh",
           role: "Trưởng phòng Nhân sự, Bình Dương",
           avatar: "/images/customer2.jpg"
@@ -247,7 +247,7 @@ export const portfolioData = {
         submit: "Đăng ký tư vấn miễn phí",
         placeholderName: "Nhập đầy đủ họ và tên của bạn",
         placeholderPhone: "Nhập số điện thoại để liên hệ",
-        placeholderEmail: "Nhập email (ví dụ: nguyena@gmail.com)",
+        placeholderEmail: "Nhập email (ví dụ: thupt@gmail.com)",
         placeholderMessage: "Hãy cho tôi biết nhu cầu của bạn (Hạn mức mong muốn, thời gian vay, tài sản thế chấp nếu có)..."
       },
       loanOptions: [
@@ -261,7 +261,7 @@ export const portfolioData = {
       infoTitle: "Thông tin liên hệ trực tiếp",
       infoDesc: "Tôi luôn sẵn sàng lắng nghe và giải đáp mọi thắc mắc của bạn 24/7. Hãy liên hệ qua bất cứ kênh nào thuận tiện nhất dưới đây.",
       phone: "0909 123 456",
-      email: "nguyenvana@bank.com.vn",
+      email: "thupt@bank.com.vn",
       address: "232 Nguyễn Thị Minh Khai, Phường Võ Thị Sáu, Quận 3, TP. Hồ Chí Minh",
       socials: {
         zalo: "#",
@@ -273,7 +273,7 @@ export const portfolioData = {
   },
   en: {
     meta: {
-      title: "Nguyen Van A - Professional Bank Loan Support Specialist",
+      title: "Pham Thi Thu - Professional Bank Loan Support Specialist",
       description: "Accompanying clients on the journey to realizing financial plans. Consulting for home loans, unsecured loans, car loans, and business loans with preferential rates."
     },
     nav: {
@@ -286,7 +286,7 @@ export const portfolioData = {
       consultBtn: "Book Consultation"
     },
     hero: {
-      name: "Nguyen Van A",
+      name: "Pham Thi Thu",
       title: "Personal & Business Loan Support Specialist",
       slogan: "Accompanying clients on the journey to realizing their financial plans.",
       ctaPrimary: "Request Advice",
@@ -302,10 +302,10 @@ export const portfolioData = {
     about: {
       title: "About Me",
       subtitle: "Who Am I?",
-      intro: "Hello, I am Nguyen Van A - a professional financial advisor and bank loan specialist. With over 5 years of experience at Vietnam's leading commercial banks, I am proud to have accompanied and assisted more than 500 individual and business clients in accessing safe, quick, and cost-effective credit solutions.",
+      intro: "Hello, I am Pham Thi Thu - a professional financial advisor and bank loan specialist. With over 5 years of experience at Vietnam's leading commercial banks, I am proud to have accompanied and assisted more than 500 individual and business clients in accessing safe, quick, and cost-effective credit solutions.",
       missionTitle: "My Mission",
       missionText: "To provide transparent financial solutions and simplify complex banking procedures so that every individual and business can easily secure the right capital, realizing their dreams of owning a home, driving a car, expanding business operations, or fulfilling personal needs.",
-      avatar: "/images/Anh-profile.jpg",
+      avatar: "/images/Anh-profile.png",
       timelineTitle: "Professional Timeline",
       timeline: [
         {
@@ -436,21 +436,21 @@ export const portfolioData = {
       list: [
         {
           stars: 5,
-          text: "Mr. A supported us very enthusiastically. Our home loan file was quite challenging due to cash-based income, but he guided us to prepare the papers carefully and got it approved faster than expected.",
+          text: "Ms. Thu supported us very enthusiastically. Our home loan file was quite challenging due to cash-based income, but she guided us to prepare the papers carefully and got it approved faster than expected.",
           author: "Mrs. Lan",
           role: "Freelancer, HCMC",
           avatar: "/images/customer3.jpg"
         },
         {
           stars: 5,
-          text: "Thanks to A's advice on business capital, our enterprise managed to import goods for Tet sales right on schedule. Good rate, extremely fast disbursement procedures.",
+          text: "Thanks to Thu's advice on business capital, our enterprise managed to import goods for Tet sales right on schedule. Good rate, extremely fast disbursement procedures.",
           author: "Mr. Minh",
           role: "Import Export Director, Hanoi",
           avatar: "/images/customer1.jpg"
         },
         {
           stars: 5,
-          text: "I visited several banks but they all had tedious procedures. Meeting A through a friend, I received thorough answers to all my questions about unsecured loans. Highly professional and caring.",
+          text: "I visited several banks but they all had tedious procedures. Meeting Thu through a friend, I received thorough answers to all my questions about unsecured loans. Highly professional and caring.",
           author: "Ms. Hanh",
           role: "HR Manager, Binh Duong",
           avatar: "/images/customer2.jpg"
@@ -534,7 +534,7 @@ export const portfolioData = {
       infoTitle: "Direct Contact Information",
       infoDesc: "I am always available 24/7 to answer your queries. Feel free to reach out via any channel below.",
       phone: "+84 909 123 456",
-      email: "anv.finance@bank.com.vn",
+      email: "thupt.finance@bank.com.vn",
       address: "232 Nguyen Thi Minh Khai, Vo Thi Sau Ward, District 3, Ho Chi Minh City, Vietnam",
       socials: {
         zalo: "#",

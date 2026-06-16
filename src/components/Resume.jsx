@@ -91,28 +91,7 @@ export default function Resume({ language }) {
             </div>
 
             {/* Skills */}
-            <div>
-              <h3 className="text-lg font-bold font-title border-b border-stone-200 dark:border-stone-850 pb-3 mb-6 relative text-stone-955 dark:text-stone-50">
-                {data.skillsTitle}
-                <span className="absolute bottom-[-1px] left-0 w-12 h-[1px] bg-brandGreen-600 dark:bg-[#0df58b]" />
-              </h3>
-              <div ref={skillsRef} className="flex flex-col gap-5">
-                {data.skills.map((skill, i) => (
-                  <div className="flex flex-col gap-2" key={i}>
-                    <div className="flex justify-between text-xs font-semibold text-stone-600 dark:text-stone-300">
-                      <span>{skill.name}</span>
-                      <span>{skill.level}%</span>
-                    </div>
-                    <div className="w-full h-2 bg-stone-200 dark:bg-stone-800 rounded-full overflow-hidden">
-                      <div 
-                        className="h-full bg-gradient-to-r from-brandGreen-600 to-brandGreen-500 dark:from-[#0df58b] dark:to-emerald-500 rounded-full transition-all duration-1000" 
-                        style={{ width: animate ? `${skill.level}%` : '0%' }}
-                      ></div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+            
           </div>
 
           {/* Right Column: Work Experience */}
