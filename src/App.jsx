@@ -5,7 +5,6 @@ import About from './components/About';
 import Services from './components/Services';
 import Achievements from './components/Achievements';
 import Testimonials from './components/Testimonials';
-import Blog from './components/Blog';
 import Resume from './components/Resume';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -114,7 +113,6 @@ export default function App() {
         <Services language={language} />
         <Achievements language={language} />
         <Testimonials language={language} />
-        <Blog language={language} />
         <Resume language={language} />
         <Contact language={language} />
       </main>

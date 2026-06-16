@@ -23,7 +23,7 @@ export default function Header({ language, setLanguage, theme, toggleTheme }) {
         setIsScrolled(false);
       }
 
-      const sections = ['home', 'about', 'services', 'achievements', 'blog', 'resume', 'contact'];
+      const sections = ['home', 'about', 'services', 'achievements', 'resume', 'contact'];
       const scrollPosition = window.scrollY + 120;
 
       for (const section of sections) {
@@ -84,7 +84,7 @@ export default function Header({ language, setLanguage, theme, toggleTheme }) {
           <span className="w-8 h-8 rounded-lg bg-brandGreen-600 dark:bg-[#0df58b] text-white dark:text-stone-950 flex items-center justify-center font-extrabold text-base transition-transform duration-300 group-hover:scale-105">
             {monogram}
           </span>
-          <span className="tracking-tight text-stone-800 dark:text-stone-150">
+          <span className="tracking-tight text-stone-800 dark:text-stone-100">
             {monogram}.<span className="text-brandGreen-700 dark:text-[#0df58b]">{restOfName}</span>
           </span>
         </a>
@@ -100,7 +100,7 @@ export default function Header({ language, setLanguage, theme, toggleTheme }) {
                 href={`#${key}`}
                 className={`font-title font-semibold text-xs tracking-wider uppercase transition-colors duration-300 relative py-2 ${
                   isActive 
-                    ? 'text-brandGreen-700 dark:text-[#0df58b]' 
+                    ? 'text-brandGreen-750 dark:text-[#0df58b]' 
                     : 'text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-white'
                 }`}
                 onClick={(e) => handleLinkClick(e, key)}
@@ -120,7 +120,11 @@ export default function Header({ language, setLanguage, theme, toggleTheme }) {
         <div className="flex items-center gap-3">
           {/* Language Toggle */}
           <button 
-            className="flex items-center justify-center h-9 px-3 rounded-full border border-stone-200 dark:border-stone-800 hover:border-brandGreen-600 dark:hover:border-[#0df58b] hover:text-brandGreen-700 dark:hover:text-[#0df58b] font-title text-xs font-bold text-stone-600 dark:text-stone-400 transition-all duration-300 bg-transparent" 
+            className={`flex items-center justify-center h-9 px-3 rounded-full border transition-all duration-300 bg-transparent font-title text-xs font-bold ${
+              isScrolled 
+                ? 'border-stone-200 dark:border-stone-800 text-stone-600 dark:text-stone-400 hover:border-brandGreen-600 dark:hover:border-[#0df58b] hover:text-brandGreen-700 dark:hover:text-[#0df58b]' 
+                : 'border-stone-200 dark:border-stone-800 text-stone-600 dark:text-stone-300 hover:border-brandGreen-600 dark:hover:border-[#0df58b] hover:text-brandGreen-700 dark:hover:text-[#0df58b] lg:border-stone-950 lg:text-stone-950 lg:hover:bg-stone-950 lg:hover:text-[#0df58b]'
+            }`}
             onClick={toggleLanguage} 
             title={language === 'vi' ? 'Switch to English' : 'Chuyển sang Tiếng Việt'}
             aria-label="Toggle language"
@@ -129,9 +133,13 @@ export default function Header({ language, setLanguage, theme, toggleTheme }) {
             {language === 'vi' ? 'EN' : 'VI'}
           </button>
 
-          {/* Theme Toggle (Hidden or customized since page is default dark) */}
+          {/* Theme Toggle */}
           <button 
-            className="flex items-center justify-center w-9 h-9 rounded-full border border-stone-200 dark:border-stone-800 hover:border-brandGreen-600 dark:hover:border-[#0df58b] hover:text-brandGreen-700 dark:hover:text-[#0df58b] text-stone-600 dark:text-stone-400 transition-all duration-300 bg-transparent" 
+            className={`flex items-center justify-center w-9 h-9 rounded-full border transition-all duration-300 bg-transparent ${
+              isScrolled 
+                ? 'border-stone-200 dark:border-stone-800 text-stone-600 dark:text-stone-400 hover:border-brandGreen-600 dark:hover:border-[#0df58b] hover:text-brandGreen-700 dark:hover:text-[#0df58b]' 
+                : 'border-stone-200 dark:border-stone-800 text-stone-600 dark:text-stone-300 hover:border-brandGreen-600 dark:hover:border-[#0df58b] hover:text-brandGreen-700 dark:hover:text-[#0df58b] lg:border-stone-950 lg:text-stone-950 lg:hover:bg-stone-950 lg:hover:text-[#0df58b]'
+            }`}
             onClick={toggleTheme} 
             title={theme === 'light' ? 'Bật Dark Mode' : 'Bật Light Mode'}
             aria-label="Toggle theme"
@@ -142,7 +150,11 @@ export default function Header({ language, setLanguage, theme, toggleTheme }) {
           {/* Outlined Action Button */}
           <a
             href="#contact"
-            className="hidden md:inline-flex items-center justify-center px-5 py-2.5 rounded-full font-bold font-title text-xs border border-brandGreen-600 text-brandGreen-700 hover:bg-brandGreen-600 hover:text-white dark:border-[#0df58b] dark:text-[#0df58b] dark:hover:bg-[#0df58b] dark:hover:text-stone-950 transition-all duration-300 bg-transparent"
+            className={`hidden md:inline-flex items-center justify-center px-5 py-2.5 rounded-full font-bold font-title text-xs transition-all duration-300 bg-transparent border ${
+              isScrolled 
+                ? 'border-brandGreen-600 text-brandGreen-700 hover:bg-brandGreen-600 hover:text-white dark:border-[#0df58b] dark:text-[#0df58b] dark:hover:bg-[#0df58b] dark:hover:text-stone-950' 
+                : 'border-brandGreen-600 text-brandGreen-700 hover:bg-brandGreen-600 hover:text-white dark:border-[#0df58b] dark:text-[#0df58b] dark:hover:bg-[#0df58b] dark:hover:text-stone-950 lg:border-stone-950 lg:text-stone-950 lg:hover:bg-stone-950 lg:hover:text-[#0df58b]'
+            }`}
             onClick={(e) => handleLinkClick(e, 'contact')}
           >
             {t.consultBtn}

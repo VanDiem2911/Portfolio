@@ -139,4 +139,16 @@
 .hex-grid-pattern {
   background-image: radial-gradient(rgba(13, 245, 139, 0.05) 1px, transparent 1px);
   background-size: 24px 24px;
+}
+
+/* Infinite Marquee Scroll */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
 }

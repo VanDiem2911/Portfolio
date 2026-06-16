@@ -9,7 +9,6 @@ export const portfolioData = {
       about: "Giới thiệu",
       services: "Dịch vụ",
       achievements: "Thành tựu",
-      blog: "Kiến thức",
       resume: "Hồ sơ",
       contact: "Liên hệ",
       consultBtn: "Đăng ký tư vấn"
@@ -26,7 +25,7 @@ export const portfolioData = {
         { value: "5+", label: "Năm kinh nghiệm tín dụng" },
         { value: "95%", label: "Khách hàng hài lòng & phản hồi tốt" }
       ],
-      avatar: "/images/Anh-profile-.jpg"
+      avatar: "/images/Anh-profile.png"
     },
     about: {
       title: "Giới thiệu bản thân",
@@ -185,69 +184,6 @@ export const portfolioData = {
         }
       ]
     },
-    blog: {
-      title: "Kiến thức & Tin tức tài chính",
-      subtitle: "Cập nhật thị trường và cẩm nang vay vốn hữu ích",
-      tabs: {
-        news: "Tin tức tài chính",
-        guide: "Kiến thức vay vốn",
-        videos: "Giải đáp nhanh (Video)"
-      },
-      news: [
-        {
-          id: 1,
-          title: "Lãi suất vay mua nhà giảm sâu kỷ lục trong quý II năm nay",
-          date: "10/06/2026",
-          summary: "Cập nhật biểu lãi suất cho vay mua nhà ưu đãi mới nhất từ các ngân hàng thương mại lớn, tạo điều kiện thuận lợi cho khách hàng sở hữu nhà ở.",
-          image: "/images/finace.jpg",
-          readTime: "5 phút đọc"
-        },
-        {
-          id: 2,
-          title: "Nới room tín dụng thúc đẩy thị trường bất động sản phục hồi mạnh mẽ",
-          date: "05/06/2026",
-          summary: "Những chính sách tiền tệ mới nhất thúc đẩy dòng tiền đổ vào các dự án bất động sản nhà ở và hạ tầng trọng điểm.",
-          image: "/images/finace1.jpg",
-          readTime: "4 phút đọc"
-        }
-      ],
-      guide: [
-        {
-          id: 3,
-          title: "Bí quyết cải thiện điểm tín dụng CIC để được duyệt khoản vay nhanh nhất",
-          date: "01/06/2026",
-          summary: "Tìm hiểu điểm CIC là gì, cách kiểm tra nợ xấu và các bước cụ thể để giữ điểm tín dụng luôn ở mức tối ưu giúp ngân hàng phê duyệt hồ sơ dễ dàng.",
-          image: "/images/finace2.jpg",
-          readTime: "7 phút đọc"
-        },
-        {
-          id: 4,
-          title: "Danh mục hồ sơ pháp lý và tài chính cần chuẩn bị trước khi vay ngân hàng",
-          date: "28/05/2026",
-          summary: "Chi tiết các loại giấy tờ nhân thân, chứng minh nguồn thu nhập và tài sản thế chấp giúp bạn rút ngắn 50% thời gian thẩm định của ngân hàng.",
-          image: "/images/finace.jpg",
-          readTime: "6 phút đọc"
-        }
-      ],
-      videos: [
-        {
-          id: 5,
-          title: "Mẹo vay vốn 1 phút: Phân biệt Lãi suất ưu đãi và Lãi suất thả nổi",
-          duration: "1:25",
-          thumbnail: "/images/finace1.jpg",
-          url: "#",
-          desc: "Video giải thích ngắn gọn, dễ hiểu về cơ chế tính lãi suất thả nổi sau thời gian ưu đãi để tránh bị ngỡ ngàng."
-        },
-        {
-          id: 6,
-          title: "3 lỗi thường gặp khiến hồ sơ vay mua ô tô trả góp bị từ chối",
-          duration: "1:40",
-          thumbnail: "/images/finace2.jpg",
-          url: "#",
-          desc: "Chia sẻ ngắn về lỗi chứng minh tài chính và lịch sử trả nợ thẻ tín dụng làm ảnh hưởng đến quyết định của ngân hàng."
-        }
-      ]
-    },
     resume: {
       title: "Hồ sơ năng lực",
       subtitle: "Học vấn, kinh nghiệm và kỹ năng chuyên môn",
@@ -345,7 +281,6 @@ export const portfolioData = {
       about: "About Me",
       services: "Services",
       achievements: "Achievements",
-      blog: "Insights",
       resume: "Resume",
       contact: "Contact",
       consultBtn: "Book Consultation"
@@ -362,7 +297,7 @@ export const portfolioData = {
         { value: "5+ years", label: "Credit Experience" },
         { value: "95%", label: "Client Satisfaction Rate" }
       ],
-      avatar:"/images/Anh-profile-.jpg"
+      avatar: "/images/Anh-profile.png"
     },
     about: {
       title: "About Me",
@@ -519,69 +454,6 @@ export const portfolioData = {
           author: "Ms. Hanh",
           role: "HR Manager, Binh Duong",
           avatar: "/images/customer2.jpg"
-        }
-      ]
-    },
-    blog: {
-      title: "Financial Insights & News",
-      subtitle: "Stay updated with market trends and borrowing handbooks",
-      tabs: {
-        news: "Financial News",
-        guide: "Borrowing Guide",
-        videos: "Quick Q&A (Video)"
-      },
-      news: [
-        {
-          id: 1,
-          title: "Home Loan Interest Rates Drop to Record Lows in Q2",
-          date: "2026-06-10",
-          summary: "Updates on the latest preferential home loan rates from major commercial banks, easing the path to homeownership.",
-          image: "/images/finace.jpg",
-          readTime: "5 mins read"
-        },
-        {
-          id: 2,
-          title: "Credit Room Expansion Sparks Strong Real Estate Recovery",
-          date: "2026-06-05",
-          summary: "Latest monetary policies directing liquidity towards key housing developments and infrastructure projects.",
-          image: "/images/finace1.jpg",
-          readTime: "4 mins read"
-        }
-      ],
-      guide: [
-        {
-          id: 3,
-          title: "How to Improve Your CIC Credit Score for Fast Approval",
-          date: "2026-06-01",
-          summary: "Learn what the CIC score is, how to check for bad debts, and specific actions to keep your credit file optimized for quick bank approvals.",
-          image: "/images/finace2.jpg",
-          readTime: "7 mins read"
-        },
-        {
-          id: 4,
-          title: "Full Checklist of Personal & Financial Dossiers for Bank Loans",
-          date: "2026-05-28",
-          summary: "Detailed guidelines on personal identification, income statements, and collateral documents to cut bank appraisal time by 50%.",
-          image: "/images/finace.jpg",
-          readTime: "6 mins read"
-        }
-      ],
-      videos: [
-        {
-          id: 5,
-          title: "1-Min Tip: Preferential Interest Rates vs. Floating Interest Rates",
-          duration: "1:25",
-          thumbnail: "/images/finace1.jpg",
-          url: "#",
-          desc: "A brief, clear explanation of how floating rates behave after the initial promotional period to avoid surprises."
-        },
-        {
-          id: 6,
-          title: "3 Common Mistakes that Lead to Car Loan Rejection",
-          duration: "1:40",
-          thumbnail: "/images/finace2.jpg",
-          url: "#",
-          desc: "Quick insights on financial proofing and credit card repayment habits that heavily impact the bank's decision."
         }
       ]
     },
