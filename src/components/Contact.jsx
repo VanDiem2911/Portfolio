@@ -31,7 +31,7 @@ export default function Contact({ language }) {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!formData.name.trim()) {
@@ -60,10 +60,47 @@ export default function Contact({ language }) {
       submittedAt: new Date().toISOString()
     };
 
+    // EmailJS Configuration (Set these in your .env file)
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID';
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID';
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY';
+
+    const hasEmailJS = serviceId !== 'YOUR_SERVICE_ID' && templateId !== 'YOUR_TEMPLATE_ID' && publicKey !== 'YOUR_PUBLIC_KEY';
+
     try {
+      // Save locally to localStorage
       const existingLeads = JSON.parse(localStorage.getItem('portfolio_leads') || '[]');
       existingLeads.push(newLead);
       localStorage.setItem('portfolio_leads', JSON.stringify(existingLeads));
+
+      // Send email notification via EmailJS REST API
+      if (hasEmailJS) {
+        const loanLabel = data.loanOptions.find(opt => opt.value === formData.loanType)?.label || formData.loanType;
+
+        const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            service_id: serviceId,
+            template_id: templateId,
+            user_id: publicKey,
+            template_params: {
+              from_name: formData.name,
+              phone: formData.phone,
+              email: formData.email || 'Không cung cấp',
+              loan_type: loanLabel,
+              message: formData.message || 'Không có nội dung chi tiết',
+              to_email: 'thupt11091992@gmail.com'
+            }
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to send email via EmailJS');
+        }
+      }
       
       addToast(
         language === 'vi' 
@@ -79,9 +116,12 @@ export default function Contact({ language }) {
         loanType: 'tinchap',
         message: ''
       });
-    } catch {
+    } catch (error) {
+      console.error('Submission error:', error);
       addToast(
-        language === 'vi' ? 'Có lỗi xảy ra, vui lòng thử lại.' : 'An error occurred, please try again.',
+        language === 'vi' 
+          ? 'Gửi đăng ký thành công (đã lưu bộ nhớ tạm), tuy nhiên việc gửi email thông báo gặp sự cố.' 
+          : 'Saved successfully locally, but email notification failed.', 
         'error'
       );
     }
