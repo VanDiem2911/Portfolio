@@ -262,12 +262,12 @@ export const portfolioData = {
       infoDesc: "Tôi luôn sẵn sàng lắng nghe và giải đáp mọi thắc mắc của bạn 24/7. Hãy liên hệ qua bất cứ kênh nào thuận tiện nhất dưới đây.",
       phone: "0398 989 892",
       email: "thupt11091992@gmail.com",
-      address: "232 Nguyễn Thị Minh Khai, Phường Võ Thị Sáu, Quận 3, TP. Hồ Chí Minh\n\n* Bạn đang cần tìm nguồn vốn uy tín hoặc gặp vướng mắc hồ sơ tại Long An, Tiền Giang, Bến Tre? Kết nối với tôi ngay hôm nay, tôi luôn sẵn sàng đồng hành và hỗ trợ bạn giải quyết nhanh chóng.",
+      address: "Vòng xoay Trung Lương, TP. Mỹ Tho, tỉnh Tiền Giang\n\n* Bạn đang cần tìm nguồn vốn uy tín hoặc gặp vướng mắc hồ sơ tại Long An, Tiền Giang, Bến Tre? Kết nối với tôi ngay hôm nay, tôi luôn sẵn sàng đồng hành và hỗ trợ bạn giải quyết nhanh chóng.",
       socials: {
         zalo: "https://zalo.me/0398989892",
         facebook: "#"
       },
-      mapUrl: "https://maps.google.com/maps?q=232%20Nguy%E1%BB%85n%20Th%E1%BB%8B%20Minh%20Khai,%20Qu%E1%BA%ADn%203,%20TP.%20H%E1%BB%93%20Ch%C3%AD%20Minh&t=&z=16&ie=UTF8&iwloc=&output=embed"
+      mapUrl: "https://maps.google.com/maps?q=10.3833,106.3403&t=&z=16&ie=UTF8&iwloc=&output=embed"
     }
   },
   en: {
@@ -534,12 +534,12 @@ export const portfolioData = {
       infoDesc: "I am always available 24/7 to answer your queries. Feel free to reach out via any channel below.",
       phone: "+84 398 989 892",
       email: "thupt11091992@gmail.com",
-      address: "232 Nguyen Thi Minh Khai, Vo Thi Sau Ward, District 3, Ho Chi Minh City, Vietnam\n\n* Looking for a reputable capital source or facing dossier difficulties in Long An, Tien Giang, Ben Tre? Connect with me today, I am always ready to accompany and support you to solve it quickly.",
+      address: "Trung Luong Roundabout, My Tho City, Tien Giang Province\n\n* Looking for a reputable capital source or facing dossier difficulties in Long An, Tien Giang, Ben Tre? Connect with me today, I am always ready to accompany and support you to solve it quickly.",
       socials: {
         zalo: "https://zalo.me/0398989892",
         facebook: "#"
       },
-      mapUrl: "https://maps.google.com/maps?q=232%20Nguyen%20Thi%20Minh%20Khai,%20District%203,%20Ho%20Chi%20Minh%20City&t=&z=16&ie=UTF8&iwloc=&output=embed"
+      mapUrl: "https://maps.google.com/maps?q=10.3833,106.3403&t=&z=16&ie=UTF8&iwloc=&output=embed"
     }
   }
 };
