@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Sun, Moon, Globe } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
+import BrandLogo from './BrandLogo';
 
 export default function Header({ language, setLanguage, theme, toggleTheme }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -8,12 +9,6 @@ export default function Header({ language, setLanguage, theme, toggleTheme }) {
   const [activeSection, setActiveSection] = useState('home');
 
   const t = portfolioData[language].nav;
-  const name = portfolioData[language].hero.name;
-
-  // Split name for dynamic monogram logo: e.g. "Phạm Thị Thu" -> monogram "P" & text "Thị Thu"
-  const nameParts = name.split(' ');
-  const monogram = nameParts[0] ? nameParts[0].charAt(0) : 'P';
-  const restOfName = nameParts.slice(1).join(' ') || 'Thi Thu';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -75,18 +70,14 @@ export default function Header({ language, setLanguage, theme, toggleTheme }) {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-full">
-        {/* Dynamic Monogram Logo */}
+        {/* Brand logo */}
         <a 
           href="#home" 
-          className="flex items-center gap-2.5 font-title font-bold text-lg text-stone-900 dark:text-white group"
+          className="group"
           onClick={(e) => handleLinkClick(e, 'home')}
+          aria-label={language === 'vi' ? 'Phạm Thị Thu — Trang chủ' : 'Pham Thi Thu — Home'}
         >
-          <span className="w-8 h-8 rounded-lg bg-brandGreen-600 dark:bg-[#0df58b] text-white dark:text-stone-950 flex items-center justify-center font-extrabold text-base transition-transform duration-300 group-hover:scale-105">
-            {monogram}
-          </span>
-          <span className="tracking-tight text-stone-800 dark:text-stone-100">
-            {monogram}.<span className="text-brandGreen-700 dark:text-[#0df58b]">{restOfName}</span>
-          </span>
+          <BrandLogo imageClassName={isScrolled ? 'h-[60px] md:h-[80px]' : 'h-[100px] md:h-[120px]'} />
         </a>
 
         {/* Desktop Navigation Links */}

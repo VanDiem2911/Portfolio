@@ -1,4 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">Phạm Thị Thu</title>
+  <desc id="desc">Monogram T with a rising financial path</desc>
   <rect x="3" y="3" width="58" height="58" rx="17" fill="#101827"/>
   <path fill="#fff" d="M14 17h36v9.5H36.5V48h-9V26.5H14V17Z"/>
   <path d="m30.5 47.5 16-16m-7.5 0h7.5V39" fill="none" stroke="#20d67a" stroke-linecap="round" stroke-linejoin="round" stroke-width="4.8"/>

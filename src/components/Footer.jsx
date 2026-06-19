@@ -1,4 +1,5 @@
 import { portfolioData } from '../data/portfolioData';
+import BrandLogo from './BrandLogo';
 
 export default function Footer({ language }) {
   const currentYear = new Date().getFullYear();
@@ -21,27 +22,20 @@ export default function Footer({ language }) {
   };
 
   const name = portfolioData[language].hero.name;
-  const nameParts = name.split(' ');
-  const monogram = nameParts[0] ? nameParts[0].charAt(0) : 'P';
-  const restOfName = nameParts.slice(1).join(' ') || 'Thi Thu';
 
   return (
-    <footer className="bg-[#fdfbf7] dark:bg-[#090d16] border-t border-stone-200 dark:border-stone-850 py-16 pb-8 text-left">
+    <footer className="bg-[#fdfbf7] dark:bg-[#090d16] border-t border-stone-200 dark:border-stone-850 text-left items-center">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-12">
           {/* Brand Col */}
           <div className="md:col-span-5 flex flex-col gap-4">
             <a 
               href="#home" 
-              className="flex items-center gap-2.5 font-title font-bold text-lg text-stone-900 dark:text-white group self-start"
+              className="group self-start"
               onClick={(e) => handleScrollToSection(e, 'home')}
+              aria-label={language === 'vi' ? 'Phạm Thị Thu — Trang chủ' : 'Pham Thi Thu — Home'}
             >
-              <span className="w-8 h-8 rounded-lg bg-brandGreen-600 dark:bg-[#0df58b] text-white dark:text-stone-950 flex items-center justify-center font-extrabold text-base transition-transform duration-300 group-hover:scale-105">
-                {monogram}
-              </span>
-              <span className="tracking-tight text-stone-800 dark:text-white">
-                {monogram}.<span className="text-brandGreen-700 dark:text-[#0df58b]">{restOfName}</span>
-              </span>
+              <BrandLogo imageClassName="h-[75px] md:h-[200px]" />
             </a>
             <p className="text-sm text-stone-600 dark:text-stone-400 leading-relaxed max-w-sm">
               {language === 'vi' 
@@ -52,8 +46,8 @@ export default function Footer({ language }) {
           </div>
 
           {/* Disclaimer Col */}
-          <div className="md:col-span-6 md:col-start-7">
-            <div className="bg-white dark:bg-[#111827]/40 border border-stone-200 dark:border-stone-850 p-5 rounded-xl shadow-sm">
+          <div className="md:col-span-6 md:col-start-7 pt-24 pb-8">
+            <div className="bg-white dark:bg-[#111827]/40 border border-stone-200 dark:border-stone-850 p-5 rounded-xl shadow-sm text-center">
               <h5 className="text-[10px] font-bold font-title text-stone-700 dark:text-stone-300 uppercase tracking-wider mb-2 leading-none">
                 {language === 'vi' ? 'Tuyên bố miễn trừ trách nhiệm' : 'Disclaimer'}
               </h5>
