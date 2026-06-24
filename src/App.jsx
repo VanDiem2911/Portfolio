@@ -19,16 +19,7 @@ import { portfolioData } from './data/portfolioData';
 
 
 export default function App() {
-  // Check browser/system preference or localStorage for initial theme
-  const getInitialTheme = () => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) return savedTheme;
-    const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    return userPrefersDark ? 'dark' : 'light';
-  };
-
   const [language, setLanguage] = useState('vi');
-  const [theme, setTheme] = useState(getInitialTheme);
 
   // Simple client-side hash routing
   const parseHash = () => {
@@ -57,15 +48,11 @@ export default function App() {
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
-  // Synchronize CSS class for dark theme
+  // Ensure only light theme is active
   useEffect(() => {
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-    localStorage.setItem('theme', theme);
-  }, [theme]);
+    document.documentElement.classList.remove('dark');
+    localStorage.removeItem('theme');
+  }, []);
 
   // Synchronize document SEO title and meta description based on language and route
   useEffect(() => {
@@ -136,17 +123,11 @@ export default function App() {
     };
   }, [language, route]);
 
-  const toggleTheme = () => {
-    setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
-  };
-
   return (
     <>
       <Header 
         language={language} 
         setLanguage={setLanguage} 
-        theme={theme} 
-        toggleTheme={toggleTheme} 
       />
       
       {route.page === 'home' && (

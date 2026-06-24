@@ -308,7 +308,7 @@ export const portfolioData = {
       intro: "Hello, I am Pham Thi Thu - a professional financial advisor and bank loan specialist. With over 5 years of experience at Vietnam's leading commercial banks, I am proud to have accompanied and assisted more than 500 individual and business clients in accessing safe, quick, and cost-effective credit solutions.",
       missionTitle: "My Mission",
       missionText: "To provide transparent financial solutions and simplify complex banking procedures so that every individual and business can easily secure the right capital, realizing their dreams of owning a home, driving a car, expanding business operations, or fulfilling personal needs.",
-      avatar: "/images/Anh-profile.png",
+      avatar: "/images/Anh-profile1.jpg",
       timelineTitle: "Professional Timeline",
       timeline: [
         {

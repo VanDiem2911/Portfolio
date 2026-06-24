@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Sun, Moon, Globe, User } from 'lucide-react';
+import { Menu, X, Globe, User } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
 import BrandLogo from './BrandLogo';
 
-export default function Header({ language, setLanguage, theme, toggleTheme }) {
+export default function Header({ language, setLanguage }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
@@ -189,20 +189,6 @@ export default function Header({ language, setLanguage, theme, toggleTheme }) {
           >
             <Globe size={13} className="mr-1" />
             {language === 'vi' ? 'EN' : 'VI'}
-          </button>
-
-          {/* Theme Toggle */}
-          <button 
-            className={`flex items-center justify-center w-9 h-9 rounded-full border transition-all duration-300 bg-transparent ${
-              isScrolled 
-                ? 'border-stone-200 dark:border-stone-800 text-stone-600 dark:text-stone-400 hover:border-brandGreen-600 dark:hover:border-[#0df58b] hover:text-brandGreen-700 dark:hover:text-[#0df58b]' 
-                : 'border-stone-200 dark:border-stone-800 text-stone-600 dark:text-stone-300 hover:border-brandGreen-600 dark:hover:border-[#0df58b] hover:text-brandGreen-700 dark:hover:text-[#0df58b] lg:border-stone-950 lg:text-stone-950 lg:hover:bg-stone-950 lg:hover:text-[#0df58b]'
-            }`}
-            onClick={toggleTheme} 
-            title={theme === 'light' ? 'Bật Dark Mode' : 'Bật Light Mode'}
-            aria-label="Toggle theme"
-          >
-            {theme === 'light' ? <Moon size={15} /> : <Sun size={15} />}
           </button>
 
           {/* Admin Avatar Toggle Icon */}
