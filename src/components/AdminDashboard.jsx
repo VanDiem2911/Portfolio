@@ -17,9 +17,11 @@ export default function AdminDashboard({ language }) {
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [location, setLocation] = useState('');
+  const [mapLocation, setMapLocation] = useState('');
   const [area, setArea] = useState('');
   const [type, setType] = useState('house');
   const [imageUrl, setImageUrl] = useState('');
+  const [imageUrls, setImageUrls] = useState([]);
   const [contactName, setContactName] = useState('');
   const [contactPhone, setContactPhone] = useState('');
   const [status, setStatus] = useState('available');
@@ -60,29 +62,34 @@ export default function AdminDashboard({ language }) {
     return labels[loanType] || loanType || (language === 'vi' ? 'Vay vốn' : 'Service Lead');
   };
 
-  const uploadImageToCloudinary = async (file, setImageValue, target) => {
-    if (!file) return;
-
+  const uploadSingleImageToCloudinary = async (file) => {
     const token = localStorage.getItem('adminToken');
     const formData = new FormData();
     formData.append('file', file);
+
+    const response = await fetch(`${API_BASE}/uploads/image`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      },
+      body: formData
+    });
+
+    const data = await response.json();
+    if (!response.ok) {
+      throw new Error(data.error || 'Upload failed');
+    }
+
+    return data.url;
+  };
+
+  const uploadImageToCloudinary = async (file, setImageValue, target) => {
+    if (!file) return;
     setUploadingTarget(target);
 
     try {
-      const response = await fetch(`${API_BASE}/uploads/image`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${token}`
-        },
-        body: formData
-      });
-
-      const data = await response.json();
-      if (!response.ok) {
-        throw new Error(data.error || 'Upload failed');
-      }
-
-      setImageValue(data.url);
+      const url = await uploadSingleImageToCloudinary(file);
+      setImageValue(url);
     } catch (err) {
       console.error(err);
       alert(language === 'vi'
@@ -91,6 +98,52 @@ export default function AdminDashboard({ language }) {
     } finally {
       setUploadingTarget(null);
     }
+  };
+
+  const uploadPropertyImagesToCloudinary = async (files) => {
+    const selectedFiles = Array.from(files || []);
+    if (selectedFiles.length === 0) return;
+
+    setUploadingTarget('property');
+    try {
+      const uploadedUrls = [];
+      for (const file of selectedFiles) {
+        const url = await uploadSingleImageToCloudinary(file);
+        uploadedUrls.push(url);
+      }
+
+      setImageUrls(prev => {
+        const next = [...prev, ...uploadedUrls];
+        setImageUrl(next[0] || '');
+        return next;
+      });
+    } catch (err) {
+      console.error(err);
+      alert(language === 'vi'
+        ? 'Không thể upload một hoặc nhiều ảnh lên Cloudinary. Vui lòng kiểm tra cấu hình backend.'
+        : 'Unable to upload one or more images to Cloudinary. Please check backend configuration.');
+    } finally {
+      setUploadingTarget(null);
+    }
+  };
+
+  const addPropertyImageUrl = () => {
+    const url = imageUrl.trim();
+    if (!url) return;
+
+    setImageUrls(prev => {
+      if (prev.includes(url)) return prev;
+      return [...prev, url];
+    });
+    setImageUrl('');
+  };
+
+  const removePropertyImageUrl = (urlToRemove) => {
+    setImageUrls(prev => {
+      const next = prev.filter(url => url !== urlToRemove);
+      setImageUrl(next[0] || '');
+      return next;
+    });
   };
 
   useEffect(() => {
@@ -138,9 +191,11 @@ export default function AdminDashboard({ language }) {
     setDescription('');
     setPrice('');
     setLocation('');
+    setMapLocation('');
     setArea('');
     setType('house');
     setImageUrl('');
+    setImageUrls([]);
     setContactName('Thu Phạm'); // default agent name
     setContactPhone('0398989892');
     setStatus('available');
@@ -153,9 +208,11 @@ export default function AdminDashboard({ language }) {
     setDescription(item.description || '');
     setPrice(item.price);
     setLocation(item.location);
+    setMapLocation(item.mapLocation || '');
     setArea(item.area.toString());
     setType(item.type);
     setImageUrl(item.imageUrl || '');
+    setImageUrls(item.imageUrls?.length ? item.imageUrls : (item.imageUrl ? [item.imageUrl] : []));
     setContactName(item.contactName);
     setContactPhone(item.contactPhone);
     setStatus(item.status);
@@ -166,14 +223,18 @@ export default function AdminDashboard({ language }) {
     e.preventDefault();
     const token = localStorage.getItem('adminToken');
     
+    const normalizedImageUrls = imageUrls.length ? imageUrls : (imageUrl ? [imageUrl] : []);
+
     const payload = {
       title,
       description,
       price,
       location,
+      mapLocation,
       area: parseFloat(area),
       type,
-      imageUrl,
+      imageUrl: normalizedImageUrls[0] || imageUrl,
+      imageUrls: normalizedImageUrls,
       contactName,
       contactPhone,
       status
@@ -1014,35 +1075,91 @@ export default function AdminDashboard({ language }) {
                     className="w-full px-3.5 py-2.5 text-xs bg-stone-50 dark:bg-[#192135] border border-stone-200 dark:border-stone-700/80 rounded-xl focus:outline-none focus:ring-2 focus:ring-brandGreen-600 dark:focus:ring-[#0df58b] text-stone-900 dark:text-white"
                   />
                   <p className="mt-1.5 text-[10px] font-medium text-stone-400 dark:text-stone-500">
-                    {language === 'vi' ? 'Địa chỉ này sẽ được dùng để hiển thị vị trí trên Google Maps.' : 'This address will be used to display the listing on Google Maps.'}
+                    {language === 'vi' ? 'Địa chỉ này hiển thị trên website. Nếu không nhập định vị Google Maps bên dưới, bản đồ sẽ dùng địa chỉ này.' : 'This address is shown on the website. If no Google Maps pin is entered below, the map will use this address.'}
+                  </p>
+                </div>
+
+                <div>
+                  <label className="block text-[10px] font-bold uppercase tracking-wider text-stone-500 mb-1">
+                    {language === 'vi' ? 'Định vị Google Maps (không bắt buộc)' : 'Google Maps Pin (optional)'}
+                  </label>
+                  <input
+                    type="text"
+                    value={mapLocation}
+                    onChange={(e) => setMapLocation(e.target.value)}
+                    placeholder={language === 'vi' ? 'Dán link Google Maps, tọa độ, hoặc địa chỉ chính xác' : 'Paste a Google Maps link, coordinates, or exact address'}
+                    className="w-full px-3.5 py-2.5 text-xs bg-stone-50 dark:bg-[#192135] border border-stone-200 dark:border-stone-700/80 rounded-xl focus:outline-none focus:ring-2 focus:ring-brandGreen-600 dark:focus:ring-[#0df58b] text-stone-900 dark:text-white"
+                  />
+                  <p className="mt-1.5 text-[10px] font-medium text-stone-400 dark:text-stone-500">
+                    {language === 'vi' ? 'Có định vị thì bản đồ dùng định vị này; bỏ trống thì dùng Địa chỉ chi tiết / Khu vực.' : 'When provided, the map uses this pin; otherwise it falls back to the detailed address.'}
                   </p>
                 </div>
 
                 {/* Row 4: Image Upload */}
                 <div>
                   <label className="block text-[10px] font-bold uppercase tracking-wider text-stone-500 mb-1">
-                    {language === 'vi' ? 'Hình ảnh dự án' : 'Project Image'}
+                    {language === 'vi' ? 'Hình ảnh dự án' : 'Project Images'}
                   </label>
                   <label className="mb-3 flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-dashed border-stone-300 bg-stone-50 px-3.5 py-4 text-xs font-bold uppercase tracking-wider text-stone-600 transition-colors hover:border-brandGreen-600 hover:text-brandGreen-700 dark:border-stone-700/80 dark:bg-[#192135] dark:text-stone-300 dark:hover:border-[#0df58b] dark:hover:text-[#0df58b]">
                     <UploadCloud size={16} />
                     {uploadingTarget === 'property'
                       ? (language === 'vi' ? 'Đang upload...' : 'Uploading...')
-                      : (language === 'vi' ? 'Chọn ảnh từ máy' : 'Choose image from device')}
+                      : (language === 'vi' ? 'Chọn nhiều ảnh từ máy' : 'Choose multiple images')}
                     <input
                       type="file"
                       accept="image/*"
+                      multiple
                       className="sr-only"
                       disabled={uploadingTarget === 'property'}
-                      onChange={(e) => uploadImageToCloudinary(e.target.files?.[0], setImageUrl, 'property')}
+                      onChange={(e) => {
+                        uploadPropertyImagesToCloudinary(e.target.files);
+                        e.target.value = '';
+                      }}
                     />
                   </label>
-                  <input
-                    type="url"
-                    value={imageUrl}
-                    onChange={(e) => setImageUrl(e.target.value)}
-                    placeholder={language === 'vi' ? 'URL Cloudinary sẽ tự điền sau khi upload' : 'Cloudinary URL will appear after upload'}
-                    className="w-full px-3.5 py-2.5 text-xs bg-stone-50 dark:bg-[#192135] border border-stone-200 dark:border-stone-700/80 rounded-xl focus:outline-none focus:ring-2 focus:ring-brandGreen-600 dark:focus:ring-[#0df58b] text-stone-900 dark:text-white"
-                  />
+                  <div className="flex flex-col gap-2 sm:flex-row">
+                    <input
+                      type="url"
+                      value={imageUrl}
+                      onChange={(e) => setImageUrl(e.target.value)}
+                      placeholder={language === 'vi' ? 'Dán URL ảnh rồi bấm Thêm ảnh' : 'Paste an image URL, then add it'}
+                      className="w-full px-3.5 py-2.5 text-xs bg-stone-50 dark:bg-[#192135] border border-stone-200 dark:border-stone-700/80 rounded-xl focus:outline-none focus:ring-2 focus:ring-brandGreen-600 dark:focus:ring-[#0df58b] text-stone-900 dark:text-white"
+                    />
+                    <button
+                      type="button"
+                      onClick={addPropertyImageUrl}
+                      className="shrink-0 rounded-xl border border-stone-200 px-4 py-2.5 text-[10px] font-title font-bold uppercase tracking-wider text-stone-600 transition-colors hover:border-brandGreen-600 hover:text-brandGreen-700 dark:border-stone-700/80 dark:text-stone-300 dark:hover:border-[#0df58b] dark:hover:text-[#0df58b]"
+                    >
+                      {language === 'vi' ? 'Thêm ảnh' : 'Add image'}
+                    </button>
+                  </div>
+
+                  {imageUrls.length > 0 && (
+                    <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 gap-3">
+                      {imageUrls.map((url, index) => (
+                        <div key={`${url}-${index}`} className="group relative aspect-square overflow-hidden rounded-xl border border-stone-200 bg-stone-100 dark:border-stone-700/80 dark:bg-[#192135]">
+                          <img
+                            src={url}
+                            alt={`${title || 'Property'} ${index + 1}`}
+                            className="h-full w-full object-cover"
+                          />
+                          {index === 0 && (
+                            <span className="absolute left-2 top-2 rounded-full bg-stone-950/80 px-2 py-1 text-[9px] font-bold uppercase tracking-wider text-[#0df58b]">
+                              {language === 'vi' ? 'Ảnh bìa' : 'Cover'}
+                            </span>
+                          )}
+                          <button
+                            type="button"
+                            onClick={() => removePropertyImageUrl(url)}
+                            className="absolute right-2 top-2 flex h-7 w-7 items-center justify-center rounded-full bg-stone-950/75 text-white opacity-100 transition-colors hover:bg-red-600 sm:opacity-0 sm:group-hover:opacity-100"
+                            aria-label={language === 'vi' ? 'Xóa ảnh' : 'Remove image'}
+                          >
+                            <X size={13} />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 {/* Row 5: Contact Name, Contact Phone, Status */}

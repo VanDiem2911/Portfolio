@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ArrowLeft, MapPin, Ruler, Phone, User, Home, Trees, Calendar, ShieldCheck, Mail, Send } from 'lucide-react';
+import { ArrowLeft, MapPin, Ruler, Phone, User, Home, Trees, Calendar, ShieldCheck, Mail, Send, X } from 'lucide-react';
 import { API_BASE } from '../config';
 
 // Fallback seed data to resolve if backend is offline
@@ -62,6 +62,26 @@ const FALLBACK_PROPERTIES = [
   }
 ];
 
+const getGoogleMapsQuery = (value) => {
+  const raw = (value || '').trim();
+  if (!raw) return '';
+
+  const coordinateMatch = raw.match(/@(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)/);
+  if (coordinateMatch) {
+    return `${coordinateMatch[1]},${coordinateMatch[2]}`;
+  }
+
+  try {
+    const url = new URL(raw);
+    const query = url.searchParams.get('q') || url.searchParams.get('query');
+    if (query) return query;
+  } catch {
+    // Not a URL, use it as a normal address/search query.
+  }
+
+  return raw;
+};
+
 export default function PropertyDetail({ language, propertyId }) {
   const [property, setProperty] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -69,6 +89,7 @@ export default function PropertyDetail({ language, propertyId }) {
   const [inquiryPhone, setInquiryPhone] = useState('');
   const [inquiryMsg, setInquiryMsg] = useState('');
   const [submitStatus, setSubmitStatus] = useState(null); // null, success, error
+  const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
     fetchPropertyDetails();
@@ -144,10 +165,6 @@ export default function PropertyDetail({ language, propertyId }) {
     window.location.hash = '#/blog';
   };
 
-  const mapQuery = encodeURIComponent(property?.location || '');
-  const mapEmbedUrl = `https://maps.google.com/maps?q=${mapQuery}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
-  const mapOpenUrl = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
-
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-brandBeige-50 dark:bg-[#0b0f19] pt-20">
@@ -172,6 +189,15 @@ export default function PropertyDetail({ language, propertyId }) {
       </div>
     );
   }
+
+  const galleryImages = property.imageUrls?.length
+    ? property.imageUrls
+    : [property.imageUrl || 'https://picsum.photos/seed/realestate/800/600'];
+  const coverImage = galleryImages[0];
+  const mapSource = property.mapLocation?.trim() || property.location || '';
+  const mapQuery = encodeURIComponent(getGoogleMapsQuery(mapSource));
+  const mapEmbedUrl = `https://maps.google.com/maps?q=${mapQuery}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
+  const mapOpenUrl = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
 
   return (
     <section className="min-h-screen pt-28 pb-20 px-6 bg-brandBeige-50 dark:bg-[#0b0f19] transition-colors duration-300">
@@ -226,14 +252,41 @@ export default function PropertyDetail({ language, propertyId }) {
             {/* Property Image Cover */}
             <div className="relative h-[300px] sm:h-[450px] rounded-3xl overflow-hidden shadow-lg border border-stone-200 dark:border-stone-850">
               <img
-                src={property.imageUrl || 'https://picsum.photos/seed/realestate/800/600'}
+                src={coverImage}
                 alt={property.title}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover cursor-zoom-in"
+                onClick={() => setSelectedImage(coverImage)}
               />
               <div className="absolute top-4 right-4 bg-stone-950/95 dark:bg-[#0b0f19]/95 backdrop-blur-sm text-[#0df58b] text-xl font-title font-bold px-4 py-2.5 rounded-xl border border-stone-800">
                 {property.price}
               </div>
             </div>
+
+            {galleryImages.length > 1 && (
+              <div className="bg-white dark:bg-[#111726] border border-stone-200 dark:border-stone-850 p-5 rounded-3xl space-y-4">
+                <h2 className="font-title text-base font-bold text-stone-900 dark:text-stone-100">
+                  {language === 'vi' ? 'Thư viện hình ảnh' : 'Image Gallery'}
+                </h2>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                  {galleryImages.map((url, index) => (
+                    <button
+                      key={`${url}-${index}`}
+                      type="button"
+                      onClick={() => setSelectedImage(url)}
+                      className="group relative aspect-square overflow-hidden rounded-2xl border border-stone-200 bg-stone-100 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-brandGreen-600 dark:border-stone-800 dark:bg-[#192135] dark:focus:ring-[#0df58b]"
+                    >
+                      <img
+                        src={url}
+                        alt={`${property.title} ${index + 1}`}
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                      <span className="absolute inset-0 bg-stone-950/0 transition-colors group-hover:bg-stone-950/15" />
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* Spec Card Grid (Not a spec list table, per taste-guidelines 4.9 alternative 1) */}
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
@@ -301,6 +354,11 @@ export default function PropertyDetail({ language, propertyId }) {
                   <MapPin size={14} className="text-brandGreen-600 dark:text-[#0df58b]" />
                   <span>{property.location}</span>
                 </div>
+                {property.mapLocation && (
+                  <p className="text-[10px] font-medium text-stone-400 dark:text-stone-500">
+                    {language === 'vi' ? 'Bản đồ đang dùng định vị Google Maps riêng.' : 'The map is using a custom Google Maps pin.'}
+                  </p>
+                )}
                 <a
                   href={mapOpenUrl}
                   target="_blank"
@@ -418,6 +476,27 @@ export default function PropertyDetail({ language, propertyId }) {
         </div>
 
       </div>
+      {selectedImage && (
+        <div
+          className="fixed inset-0 z-[3000] flex items-center justify-center bg-stone-950/90 p-4 backdrop-blur-sm"
+          onClick={() => setSelectedImage(null)}
+        >
+          <button
+            type="button"
+            onClick={() => setSelectedImage(null)}
+            className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
+            aria-label={language === 'vi' ? 'Đóng ảnh' : 'Close image'}
+          >
+            <X size={20} />
+          </button>
+          <img
+            src={selectedImage}
+            alt={property.title}
+            className="max-h-[86vh] max-w-[94vw] rounded-2xl object-contain shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </section>
   );
 }
