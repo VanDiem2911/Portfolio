@@ -166,15 +166,16 @@ export default function HomeBlog({ language }) {
             {/* Modal Body (Scrollable) */}
             <div className="overflow-y-auto flex-1 text-left">
               {/* Image banner */}
-              <div className="h-64 w-full relative">
+              <div className="h-72 w-full relative">
                 <img
                   src={selectedPost.imageUrl}
                   alt={selectedPost.title}
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-stone-950/20 to-transparent" />
-                <div className="absolute bottom-6 px-8 text-white space-y-2">
-                  <div className="flex items-center gap-4 text-[10px] text-stone-300 font-bold uppercase tracking-wider">
+                <div className="absolute inset-0 bg-gradient-to-t from-stone-950/95 via-stone-950/45 to-stone-950/10" />
+                <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
+                  <div className="rounded-2xl bg-stone-950/70 p-4 sm:p-5 text-white shadow-2xl ring-1 ring-white/10 backdrop-blur-md space-y-2.5">
+                  <div className="flex flex-wrap items-center gap-3 text-[10px] text-stone-200 font-bold uppercase tracking-wider">
                     <span className="flex items-center gap-1">
                       <Calendar size={11} />
                       {selectedPost.date}
@@ -184,9 +185,10 @@ export default function HomeBlog({ language }) {
                       {selectedPost.readTime}
                     </span>
                   </div>
-                  <h3 className="font-title text-xl md:text-2xl font-bold leading-tight">
+                  <h3 className="font-title text-2xl md:text-3xl font-extrabold leading-tight text-white drop-shadow-[0_3px_12px_rgba(0,0,0,0.95)]">
                     {selectedPost.title}
                   </h3>
+                  </div>
                 </div>
               </div>
 

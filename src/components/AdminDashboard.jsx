@@ -146,6 +146,11 @@ export default function AdminDashboard({ language }) {
     });
   };
 
+  const setPropertyCoverImage = (coverUrl) => {
+    setImageUrls(prev => [coverUrl, ...prev.filter(url => url !== coverUrl)]);
+    setImageUrl(coverUrl);
+  };
+
   useEffect(() => {
     // Check authentication
     const token = localStorage.getItem('adminToken');
@@ -1147,6 +1152,15 @@ export default function AdminDashboard({ language }) {
                             <span className="absolute left-2 top-2 rounded-full bg-stone-950/80 px-2 py-1 text-[9px] font-bold uppercase tracking-wider text-[#0df58b]">
                               {language === 'vi' ? 'Ảnh bìa' : 'Cover'}
                             </span>
+                          )}
+                          {index !== 0 && (
+                            <button
+                              type="button"
+                              onClick={() => setPropertyCoverImage(url)}
+                              className="absolute bottom-2 left-2 right-2 rounded-full bg-stone-950/75 px-2 py-1.5 text-[9px] font-bold uppercase tracking-wider text-white opacity-100 transition-colors hover:bg-brandGreen-600 sm:opacity-0 sm:group-hover:opacity-100"
+                            >
+                              {language === 'vi' ? 'Đặt làm bìa' : 'Set cover'}
+                            </button>
                           )}
                           <button
                             type="button"
