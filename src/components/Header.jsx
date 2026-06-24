@@ -140,11 +140,11 @@ export default function Header({ language, setLanguage, theme, toggleTheme }) {
         {/* Brand logo */}
         <a 
           href="#home" 
-          className="group"
+          className="group flex items-center h-full"
           onClick={(e) => handleLinkClick(e, 'home')}
           aria-label={language === 'vi' ? 'Phạm Thị Thu — Trang chủ' : 'Pham Thi Thu — Home'}
         >
-          <BrandLogo imageClassName={isScrolled ? 'h-[60px] md:h-[80px]' : 'h-[100px] md:h-[120px]'} />
+          <BrandLogo imageClassName={isScrolled ? 'h-[60px] md:h-[75px]' : 'h-[90px] md:h-[110px]'} />
         </a>
 
         {/* Desktop Navigation Links */}
