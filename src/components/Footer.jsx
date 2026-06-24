@@ -63,7 +63,16 @@ export default function Footer({ language }) {
 
         {/* Footer Bottom */}
         <div className="border-t border-stone-200 dark:border-stone-850 pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-stone-500 dark:text-stone-500 gap-4 ">
-          <p>© {currentYear} {name}. All rights reserved.</p>
+          <div className="flex items-center gap-3.5">
+            <p>© {currentYear} {name}. All rights reserved.</p>
+            <span className="hidden sm:inline text-stone-300 dark:text-stone-800">•</span>
+            <a 
+              href="#/admin/login" 
+              className="hover:text-brandGreen-700 dark:hover:text-[#0df58b] transition-colors font-title font-bold uppercase tracking-wider text-[9px] bg-stone-100 dark:bg-[#161d2d] px-2.5 py-1 rounded-md border border-stone-200 dark:border-stone-800/80"
+            >
+              {language === 'vi' ? 'Quản trị' : 'Admin Portal'}
+            </a>
+          </div>
           <p>Hotline: {portfolioData[language].contact.phone} - Email: {portfolioData[language].contact.email}</p>
         </div>
       </div>

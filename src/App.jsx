@@ -9,7 +9,14 @@ import Resume from './components/Resume';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import FloatingContact from './components/FloatingContact';
+import Blog from './components/Blog';
+import PropertyDetail from './components/PropertyDetail';
+import AdminLogin from './components/AdminLogin';
+import AdminDashboard from './components/AdminDashboard';
+import HomeProjects from './components/HomeProjects';
+import HomeBlog from './components/HomeBlog';
 import { portfolioData } from './data/portfolioData';
+
 
 export default function App() {
   // Check browser/system preference or localStorage for initial theme
@@ -23,6 +30,33 @@ export default function App() {
   const [language, setLanguage] = useState('vi');
   const [theme, setTheme] = useState(getInitialTheme);
 
+  // Simple client-side hash routing
+  const parseHash = () => {
+    const hash = window.location.hash || '';
+    if (hash.startsWith('#/blog/')) {
+      const id = hash.replace('#/blog/', '');
+      return { page: 'blog-detail', id };
+    } else if (hash === '#/blog') {
+      return { page: 'blog' };
+    } else if (hash === '#/admin') {
+      return { page: 'admin' };
+    } else if (hash === '#/admin/login') {
+      return { page: 'admin-login' };
+    }
+    return { page: 'home' };
+  };
+
+  const [route, setRoute] = useState(parseHash());
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      setRoute(parseHash());
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
   // Synchronize CSS class for dark theme
   useEffect(() => {
     if (theme === 'dark') {
@@ -33,10 +67,19 @@ export default function App() {
     localStorage.setItem('theme', theme);
   }, [theme]);
 
-  // Synchronize document SEO title and meta description based on language
+  // Synchronize document SEO title and meta description based on language and route
   useEffect(() => {
-    const meta = portfolioData[language].meta;
-    document.title = meta.title;
+    let titleText = portfolioData[language].meta.title;
+    let descText = portfolioData[language].meta.description;
+
+    if (route.page === 'blog') {
+      titleText = language === 'vi' ? 'Bất Động Sản | Phú Mỹ & TP.HCM' : 'Real Estate Catalog';
+      descText = language === 'vi' ? 'Xem danh sách đất nền, nhà bán lẻ tại Phú Mỹ và TP.HCM.' : 'Browse houses and land plots for sale.';
+    } else if (route.page === 'admin' || route.page === 'admin-login') {
+      titleText = language === 'vi' ? 'Trang Quản Trị | Admin' : 'Admin Panel';
+    }
+
+    document.title = titleText;
 
     let metaDesc = document.querySelector('meta[name="description"]');
     if (!metaDesc) {
@@ -44,15 +87,15 @@ export default function App() {
       metaDesc.name = 'description';
       document.head.appendChild(metaDesc);
     }
-    metaDesc.content = meta.description;
+    metaDesc.content = descText;
 
-    // Set HTML lang attribute
     document.documentElement.lang = language;
-  }, [language]);
+  }, [language, route]);
 
   // Intersection Observer for scroll animations (up and down scroll reveal)
-  // Handles dynamic DOM updates (like tab switching) via MutationObserver
   useEffect(() => {
+    if (route.page !== 'home') return;
+
     const observerOptions = {
       root: null,
       rootMargin: '0px 0px -60px 0px',
@@ -76,10 +119,8 @@ export default function App() {
       });
     };
 
-    // Initial observation
     observeElements();
 
-    // Set up MutationObserver to detect new DOM elements when tabs or content change
     const mutationObserver = new MutationObserver(() => {
       observeElements();
     });
@@ -93,7 +134,7 @@ export default function App() {
       observer.disconnect();
       mutationObserver.disconnect();
     };
-  }, [language]);
+  }, [language, route]);
 
   const toggleTheme = () => {
     setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
@@ -107,17 +148,28 @@ export default function App() {
         theme={theme} 
         toggleTheme={toggleTheme} 
       />
-      <main>
-        <Hero language={language} />
-        <About language={language} />
-        <Services language={language} />
-        <Achievements language={language} />
-        <Testimonials language={language} />
-        <Resume language={language} />
-        <Contact language={language} />
-      </main>
+      
+      {route.page === 'home' && (
+        <main>
+          <Hero language={language} />
+          <About language={language} />
+          <Services language={language} />
+          <Achievements language={language} />
+          <Testimonials language={language} />
+          <Resume language={language} />
+          <HomeProjects language={language} />
+          <HomeBlog language={language} />
+          <Contact language={language} />
+        </main>
+      )}
+
+      {route.page === 'blog' && <Blog language={language} />}
+      {route.page === 'blog-detail' && <PropertyDetail language={language} propertyId={route.id} />}
+      {route.page === 'admin-login' && <AdminLogin language={language} />}
+      {route.page === 'admin' && <AdminDashboard language={language} />}
+
       <Footer language={language} />
-      <FloatingContact language={language} />
+      {route.page === 'home' && <FloatingContact language={language} />}
     </>
   );
 }

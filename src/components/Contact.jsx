@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Phone, Mail, MapPin, Send, MessageSquare, X, CheckCircle } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
+import { API_BASE } from '../config';
 
 export default function Contact({ language }) {
   const data = portfolioData[language].contact;
@@ -54,10 +55,10 @@ export default function Contact({ language }) {
       return;
     }
 
-    const newLead = {
+    const loanLabel = data.loanOptions.find(opt => opt.value === formData.loanType)?.label || formData.loanType;
+    const leadPayload = {
       ...formData,
-      id: Date.now(),
-      submittedAt: new Date().toISOString()
+      loanType: loanLabel
     };
 
     // EmailJS Configuration (Set these in your .env file)
@@ -68,15 +69,21 @@ export default function Contact({ language }) {
     const hasEmailJS = serviceId !== 'YOUR_SERVICE_ID' && templateId !== 'YOUR_TEMPLATE_ID' && publicKey !== 'YOUR_PUBLIC_KEY';
 
     try {
-      // Save locally to localStorage
-      const existingLeads = JSON.parse(localStorage.getItem('portfolio_leads') || '[]');
-      existingLeads.push(newLead);
-      localStorage.setItem('portfolio_leads', JSON.stringify(existingLeads));
+      // Save to MongoDB via backend API
+      const dbResponse = await fetch(`${API_BASE}/leads`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(leadPayload)
+      });
+
+      if (!dbResponse.ok) {
+        throw new Error('Failed to save lead to database');
+      }
 
       // Send email notification via EmailJS REST API
       if (hasEmailJS) {
-        const loanLabel = data.loanOptions.find(opt => opt.value === formData.loanType)?.label || formData.loanType;
-
         const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
           method: 'POST',
           headers: {

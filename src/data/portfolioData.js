@@ -10,6 +10,8 @@ export const portfolioData = {
       services: "Dịch vụ",
       achievements: "Thành tựu",
       resume: "Hồ sơ",
+      blog: "Bất động sản",
+      homeBlog: "Blog",
       contact: "Liên hệ",
       consultBtn: "Đăng ký tư vấn"
     },
@@ -281,6 +283,8 @@ export const portfolioData = {
       services: "Services",
       achievements: "Achievements",
       resume: "Resume",
+      blog: "Real Estate",
+      homeBlog: "Blog",
       contact: "Contact",
       consultBtn: "Book Consultation"
     },

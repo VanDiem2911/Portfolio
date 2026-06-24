@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Sun, Moon, Globe } from 'lucide-react';
+import { Menu, X, Sun, Moon, Globe, User } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
 import BrandLogo from './BrandLogo';
 
@@ -7,8 +7,19 @@ export default function Header({ language, setLanguage, theme, toggleTheme }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
 
   const t = portfolioData[language].nav;
+
+  useEffect(() => {
+    const checkLogin = () => {
+      const token = localStorage.getItem('adminToken');
+      setIsAdminLoggedIn(!!token);
+    };
+    checkLogin();
+    window.addEventListener('hashchange', checkLogin);
+    return () => window.removeEventListener('hashchange', checkLogin);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,7 +29,19 @@ export default function Header({ language, setLanguage, theme, toggleTheme }) {
         setIsScrolled(false);
       }
 
-      const sections = ['home', 'about', 'services', 'achievements', 'resume', 'contact'];
+      // If we are currently on the blog/real estate page, lock the active nav tab to blog
+      if (window.location.hash.startsWith('#/blog')) {
+        setActiveSection('blog');
+        return;
+      }
+
+      // If we are currently on the admin page, lock the active nav tab to admin
+      if (window.location.hash.startsWith('#/admin')) {
+        setActiveSection('admin');
+        return;
+      }
+
+      const sections = ['home', 'about', 'services', 'achievements', 'resume', 'homeBlog', 'contact'];
       const scrollPosition = window.scrollY + 120;
 
       for (const section of sections) {
@@ -34,13 +57,57 @@ export default function Header({ language, setLanguage, theme, toggleTheme }) {
       }
     };
 
+    // Run initially to capture current hash on load
+    handleScroll();
+
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('hashchange', handleScroll);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('hashchange', handleScroll);
+    };
   }, []);
 
   const handleLinkClick = (e, sectionId) => {
     e.preventDefault();
     setIsMenuOpen(false);
+
+    // Navigate to blog section directly
+    if (sectionId === 'blog') {
+      window.location.hash = '#/blog';
+      setActiveSection('blog');
+      return;
+    }
+
+    // Navigate to admin section directly
+    if (sectionId === 'admin') {
+      window.location.hash = '#/admin';
+      setActiveSection('admin');
+      return;
+    }
+
+    // Cross-page navigation back to homepage from another subpage
+    if (window.location.hash && window.location.hash !== '#/' && !window.location.hash.startsWith('#home')) {
+      window.location.hash = '#/';
+      setTimeout(() => {
+        const el = document.getElementById(sectionId);
+        if (el) {
+          const offset = 80;
+          const bodyRect = document.body.getBoundingClientRect().top;
+          const elementRect = el.getBoundingClientRect().top;
+          const elementPosition = elementRect - bodyRect;
+          const offsetPosition = elementPosition - offset;
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }, 150);
+      setActiveSection(sectionId);
+      return;
+    }
+
     const el = document.getElementById(sectionId);
     if (el) {
       const offset = 80;
@@ -136,6 +203,28 @@ export default function Header({ language, setLanguage, theme, toggleTheme }) {
             aria-label="Toggle theme"
           >
             {theme === 'light' ? <Moon size={15} /> : <Sun size={15} />}
+          </button>
+
+          {/* Admin Avatar Toggle Icon */}
+          <button 
+            className={`flex items-center justify-center w-9 h-9 rounded-full border transition-all duration-300 bg-transparent ${
+              isAdminLoggedIn 
+                ? 'border-brandGreen-600 text-brandGreen-700 dark:border-[#0df58b] dark:text-[#0df58b] bg-brandGreen-50 dark:bg-brandGreen-950/20' 
+                : isScrolled 
+                  ? 'border-stone-200 dark:border-stone-800 text-stone-600 dark:text-stone-400 hover:border-brandGreen-600 dark:hover:border-[#0df58b] hover:text-brandGreen-700 dark:hover:text-[#0df58b]' 
+                  : 'border-stone-200 dark:border-stone-800 text-stone-600 dark:text-stone-300 hover:border-brandGreen-600 dark:hover:border-[#0df58b] hover:text-brandGreen-700 dark:hover:text-[#0df58b] lg:border-stone-950 lg:text-stone-950 lg:hover:bg-stone-950 lg:hover:text-[#0df58b]'
+            }`}
+            onClick={() => window.location.hash = '#/admin'} 
+            title={isAdminLoggedIn 
+              ? (language === 'vi' ? 'Bảng quản trị (Đang đăng nhập)' : 'Admin Dashboard (Logged In)')
+              : (language === 'vi' ? 'Đăng nhập Quản trị' : 'Admin Login')}
+            aria-label="Admin Login"
+          >
+            {isAdminLoggedIn ? (
+              <span className="text-[10px] font-title font-black uppercase tracking-wider">AD</span>
+            ) : (
+              <User size={15} />
+            )}
           </button>
 
           {/* Outlined Action Button */}
