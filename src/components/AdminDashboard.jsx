@@ -1003,16 +1003,19 @@ export default function AdminDashboard({ language }) {
                 {/* Row 3: Location */}
                 <div>
                   <label className="block text-[10px] font-bold uppercase tracking-wider text-stone-500 mb-1">
-                    {language === 'vi' ? 'Địa chỉ / Khu vực' : 'Address / Location'}
+                    {language === 'vi' ? 'Địa chỉ chi tiết / Khu vực' : 'Detailed Address / Location'}
                   </label>
                   <input
                     type="text"
                     required
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
-                    placeholder="e.g. Quận 9, TP. Hồ Chí Minh"
+                    placeholder={language === 'vi' ? 'VD: 123 Quốc lộ 13, Bến Cát, Bình Dương' : 'e.g. 123 Highway 13, Ben Cat, Binh Duong'}
                     className="w-full px-3.5 py-2.5 text-xs bg-stone-50 dark:bg-[#192135] border border-stone-200 dark:border-stone-700/80 rounded-xl focus:outline-none focus:ring-2 focus:ring-brandGreen-600 dark:focus:ring-[#0df58b] text-stone-900 dark:text-white"
                   />
+                  <p className="mt-1.5 text-[10px] font-medium text-stone-400 dark:text-stone-500">
+                    {language === 'vi' ? 'Địa chỉ này sẽ được dùng để hiển thị vị trí trên Google Maps.' : 'This address will be used to display the listing on Google Maps.'}
+                  </p>
                 </div>
 
                 {/* Row 4: Image Upload */}

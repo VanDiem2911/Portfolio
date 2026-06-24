@@ -144,6 +144,10 @@ export default function PropertyDetail({ language, propertyId }) {
     window.location.hash = '#/blog';
   };
 
+  const mapQuery = encodeURIComponent(property?.location || '');
+  const mapEmbedUrl = `https://maps.google.com/maps?q=${mapQuery}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
+  const mapOpenUrl = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-brandBeige-50 dark:bg-[#0b0f19] pt-20">
@@ -286,32 +290,37 @@ export default function PropertyDetail({ language, propertyId }) {
               </div>
             </div>
 
-            {/* Mock Map / Location Details */}
+            {/* Location Details */}
             <div className="bg-white dark:bg-[#111726] border border-stone-200 dark:border-stone-850 p-8 rounded-3xl space-y-4">
               <h2 className="font-title text-xl font-bold border-b border-stone-100 dark:border-stone-800 pb-3 text-stone-900 dark:text-stone-100">
                 {language === 'vi' ? 'Vị trí bất động sản' : 'Location details'}
               </h2>
-              <div className="flex items-center gap-2 text-stone-600 dark:text-stone-300 text-xs font-semibold">
-                <MapPin size={14} className="text-brandGreen-600 dark:text-[#0df58b]" />
-                <span>{property.location}</span>
+
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex items-center gap-2 text-stone-600 dark:text-stone-300 text-xs font-semibold">
+                  <MapPin size={14} className="text-brandGreen-600 dark:text-[#0df58b]" />
+                  <span>{property.location}</span>
+                </div>
+                <a
+                  href={mapOpenUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-1.5 rounded-full border border-stone-200 px-3.5 py-2 text-[10px] font-title font-bold uppercase tracking-wider text-stone-600 transition-colors hover:border-brandGreen-600 hover:text-brandGreen-700 dark:border-stone-800 dark:text-stone-300 dark:hover:border-[#0df58b] dark:hover:text-[#0df58b]"
+                >
+                  <MapPin size={12} />
+                  {language === 'vi' ? 'Mở Google Maps' : 'Open Google Maps'}
+                </a>
               </div>
               
-              {/* Mock map visual box */}
-              <div className="h-64 rounded-2xl border border-stone-200 dark:border-stone-800/80 bg-stone-100 dark:bg-[#192135] overflow-hidden flex flex-col items-center justify-center text-center p-6 relative">
-                <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#0df58b_1.5px,transparent_1.5px)] bg-[size:16px_16px]" />
-                <div className="relative z-10 space-y-3">
-                  <div className="w-12 h-12 bg-white dark:bg-[#111726] border border-stone-200 dark:border-stone-700/80 rounded-full flex items-center justify-center shadow-md mx-auto animate-bounce text-brandGreen-600 dark:text-[#0df58b]">
-                    <MapPin size={24} />
-                  </div>
-                  <p className="text-xs font-bold uppercase tracking-wider text-stone-500 dark:text-stone-400">
-                    {language === 'vi' ? 'Xem bản đồ vị trí thực tế' : 'Satellite View Available'}
-                  </p>
-                  <p className="text-[11px] text-stone-400 max-w-xs mx-auto">
-                    {language === 'vi'
-                      ? 'Vì lý do bảo mật, địa chỉ chính xác sẽ được cung cấp khi làm việc trực tiếp.'
-                      : 'For safety, exact coordinate details will be shared during direct consultation.'}
-                  </p>
-                </div>
+              <div className="h-72 rounded-2xl border border-stone-200 dark:border-stone-800/80 bg-stone-100 dark:bg-[#192135] overflow-hidden">
+                <iframe
+                  title={language === 'vi' ? `Bản đồ ${property.location}` : `Map of ${property.location}`}
+                  src={mapEmbedUrl}
+                  className="h-full w-full border-0"
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
               </div>
             </div>
 
